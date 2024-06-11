@@ -17,7 +17,7 @@
   if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
     let CUPvS = 17.86
     let CUPvT = '@24-06-11 10:32'
-    let CUPvSce = 16.08
+    let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
     try {

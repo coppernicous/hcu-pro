@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "Campus USAT PRO",
+  "description": "Mejora la apariencia y agrega nuevas funciones al Campus Virtual y Aula Virtual",
+  "version": "17.04",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "browser_action": {
+    "onClicked": "openNewTab"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png",
+    "256": "icon-256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.usat.edu.pe/*",
+        "*://usat.edu.pe/*",
+        "*://coppernicous.github.io/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "homepage_url": "https://coppernicous.github.io/cup/site/",
+  "content_security_policy": "script-src 'self' https://coppernicous.github.io; object-src 'self'"
+}
