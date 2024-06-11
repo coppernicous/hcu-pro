@@ -2,6 +2,10 @@
 
 Aquí se alojan todas las funcionalides y versiones de Campus PRO
 
+## Enlaces de descargas
+
+- [Aplicación para Android](https://github.com/coppernicous/hcu-pro/releases/download/android/cup-app.apk)
+- [Extensión de Chrome](https://github.com/coppernicous/hcu-pro/releases/download/extension/chrome-extension-mv2.zip)
 
 ## Estructura del repositorio
 El repositorio se organiza de la siguiente manera:
