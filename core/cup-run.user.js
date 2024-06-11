@@ -13,7 +13,7 @@
 // @homepageURL https://coppernicous.github.io/hcu-pro/site/
 // @downloadURL https://coppernicous.github.io/hcu-pro/core/cup-run.user.js
 // @updateURL   https://coppernicous.github.io/hcu-pro/core/cup-run.user.js
-// @author      anonimous
+// @author      coppernicous
 // @run-at      document-start
 // ==/UserScript==
 (function () {
