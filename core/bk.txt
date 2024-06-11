@@ -1,0 +1,1 @@
+javascript:(function(){window.__CUPm='bk';document.head.appendChild(document.createElement('script')).src='//coppernicous.github.io/hcu-pro/core/cup-main.user.js'})()
