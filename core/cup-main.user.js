@@ -393,7 +393,7 @@
               i.addEventListener('load', function() {
                 if (i.contentDocument) {
                   try {
-                    let attS = 'src::' + extHost + 'core/cup-main.user.js?' + CUPvS
+                    let attS = 'src::' + extHost + '/../core/cup-main.user.js?' + CUPvS
                     let is = $n('script', attS)
                     let h = i.contentDocument.head
                     h.insertBefore(is, h.children[0])
