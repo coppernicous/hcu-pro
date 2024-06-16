@@ -1436,7 +1436,7 @@ Sigue el <a href="https://whatsapp.com/channel/0029VaaqtvuKLaHfqGedEK40" target=
         let forceUpdate = localStorage['cup-dv-updreq']
         let logCompare = ''
         if (codeDate - lU > (48 * 60 * 60 * 1e3) || forceUpdate) {
-          let s = $n('script', 'src::' + extHost + 'cup-v.js?' + (1 * new Date()), '', 'ddhh')
+          let s = $n('script', 'src::' + extHost + '/../core/cup-v.js?' + (1 * new Date()), '', 'ddhh')
           s.addEventListener('load', function() {
             if (forceUpdate) {
               logCompare += 'Local version : ' + CUPvS + '\n'
