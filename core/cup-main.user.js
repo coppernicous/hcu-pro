@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     17.86
-// @description 2024-06-11 10:32
+// @version     17.88
+// @description 2024-06-15 21:50
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -15,8 +15,8 @@
 (function() {
   let loc = location
   if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
-    let CUPvS = 17.86
-    let CUPvT = '@24-06-11 10:32'
+    let CUPvS = 17.88
+    let CUPvT = '@24-06-15 21:50'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -393,7 +393,7 @@
               i.addEventListener('load', function() {
                 if (i.contentDocument) {
                   try {
-                    let attS = 'src::' + extHost + 'cup-main.user.js?' + CUPvS
+                    let attS = 'src::' + extHost + 'core/cup-main.user.js?' + CUPvS
                     let is = $n('script', attS)
                     let h = i.contentDocument.head
                     h.insertBefore(is, h.children[0])
