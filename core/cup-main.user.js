@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     17.88
-// @description 2024-06-15 21:50
+// @version     17.92
+// @description 2024-06-21 21:36
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -15,8 +15,8 @@
 (function() {
   let loc = location
   if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
-    let CUPvS = 17.88
-    let CUPvT = '@24-06-15 21:50'
+    let CUPvS = 17.92
+    let CUPvT = '@24-06-21 21:36'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -2194,6 +2194,7 @@ border-block-start:0;font-weight:bold;background-color:#a3d5ff}
                           let strData = strFormRaw.slice(strFormRaw.indexOf('script>LoadTree'), strFormRaw.length)
                           strData = strData.substring(16, strData.lastIndexOf('</script'))
                           strData = strData.replace(/\}\]\);*/, '}]')
+                          strData = strData.replace(/\t/g, '')
                           try {
                             let dataGrades = JSON.parse(strData)
                             closeLoader()
