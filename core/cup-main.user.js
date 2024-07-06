@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     17.92
-// @description 2024-06-21 21:36
+// @version     17.94
+// @description 2024-07-06 18:00
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -15,8 +15,8 @@
 (function() {
   let loc = location
   if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
-    let CUPvS = 17.92
-    let CUPvT = '@24-06-21 21:36'
+    let CUPvS = 17.94
+    let CUPvT = '@24-07-06 18:00'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -895,7 +895,8 @@ white}.dropdown-piluku-menu.neat_drop.dropdown-menu li a i{color:#606060}.dropdo
 li.inf-acc{font-size:14px;padding:6px;background-color:#ffffff}li.inf-acc .c div{padding:4px 12px;color:#9c9c9c;
 text-align:center}li.inf-acc .btn2dacc{color:#000;font-weight:700}.inf-acc .c{border-style:solid;border-width:1px;
 border-color:#cecece}li.inf-acc:hover .c{border-color:#000}li.inf-acc:hover .c div{color:#000}
-li.inf-acc:hover .btn2dacc{background-color:#c8c8c8}.top-bar .open a span#lblCodigoUniversitario{color:black !important}`],
+li.inf-acc:hover .btn2dacc{background-color:#c8c8c8}.top-bar .open a span#lblCodigoUniversitario{color:black !important}
+.btn-close-modal-b{display:block !important}`],
         ['ls_calificaciones', /*css*/`.col-xs-12,.col-xs-12 > * > *,.container-fluid,.panel.panel-body{padding:0 !important}
 @media (max-width:599px){.form-group{display:flex;flex-direction:column;align-items:stretch;margin-bottom:0}
 .row .form-group{margin:0px}.form-group *{width:100% !important}}@media (min-width:600px){.form-group{display:flex;
@@ -1768,9 +1769,9 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
         })
         mmodal(false)
         setTimeout(function() {
-          $$('div>.modal-title:first-child').forEach(function(a) {
+          $$('div>.modal-title:first-child,div>button+.modal-title').forEach(function(a) {
             let p = a.parentNode
-            if (!p.qsf('button')) {
+            if (!p.qsf('button.close')) {
               let pr = p.closest('.row')
               if (pr) {
                 let brH = '<span aria-hidden="true" class="ti-close" style="color:white"></span>'
@@ -1778,8 +1779,11 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
                 b.addEventListener('click', function() {
                   pr.remove()
                 })
+                b.classList.add('btn-close-modal-b')
                 p.insertBefore(b, p.firstChild)
               }
+            } else {
+              p.qsf('button.close').classList.add('btn-close-modal-b')
             }
           })
         }, 2e3)
@@ -2033,7 +2037,17 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           }
           // ---- ---- ---- ---- SCHEDULE
           let codUni = $('#lblCodigoUniversitario')?.innerText || ''
-          if (top == self && !(/^\d{3}pg/i).test(codUni)) {
+          let timesOut = ['240707-240819','241207-250201']
+          timesOut = timesOut
+            .map(function(i) {return i.split('-')})
+            .map(function(a) {
+              return a.map(function(d) {
+                return new Date(2e3 + 1 * d.slice(0,2), d.slice(2,4) - 1, d.slice(4,6)) * 1
+              })
+            })
+          let nD = new Date() * 1
+          let isTOut = timesOut.some(function([fa, fb]) { return nD > fa && nD < fb})
+          if (top == self && !(/^\d{3}pg/i).test(codUni) && !isTOut) {
             $n('div', 'class::b-sc', /*html*/`html:
               <style>.b-sc .msg-pl{text-align:center;color:gray;font-size:13px}</style>
               <div class="msg-pl">Cargando horario...</div>`,
@@ -3307,6 +3321,19 @@ filas para una mejor vista</p>'
               b.remove()
             })
           }
+          if (isTOut) {
+            let bOut = $n('div', 'class::b-tout', /*html*/`html:
+              <div class="bnn-fimg"><img src="//i.ibb.co/4YtDN2X/24-2-O.jpg"></div>
+              <div class="bnn-fimg"><img src="//i.ibb.co/D158sxg/24-2-G.jpg"></div>`,
+              custom_panel_body
+            )
+            bOut.appendChild(setStyle(/*css*/`
+              .b-tout{margin-top:28px}
+              .bnn-fimg{margin-top:12px;display:flex}
+              .b-tout .bnn-fimg img{margin:0 auto;max-width:760px;width:100%;height:auto}
+              `, 'css-cup-plann', true)
+            )
+          }
           // ---- ---- ---- ---- CUP FORMS
           if (!0) {
             let ctm_panel_more = $n('div', 'class::controlscup', '', custom_panel_body)
@@ -3322,7 +3349,7 @@ white-space:nowrap}.iappm-links a:hover{background-color:#ffffff;border-color:#c
 color:#603a12}.iappm-links a.dest:hover{border-color:#956322;background-image:
 linear-gradient(90deg, #fff18c, #ffdfa2);color:#663a0d;box-shadow:0 4px 10px -2px #0000003b}
 .info-appm .ptext{font-size:15px;color:gray;margin-bottom:14px;
-text-align:justify}`, 'css-cup', true))
+text-align:justify}`, 'css-cup-ownbanner', true))
             let ctm_pmore_in = $n('div', 'class::info-appm', '', ctm_panel_more)
             $n('div', 'class::p', 'Contribuye con Campus USAT', ctm_pmore_in)
             $n('div', 'class::ptext', 'Sigue el canal de novedades en WhatsApp, \
