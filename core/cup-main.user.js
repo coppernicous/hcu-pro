@@ -243,9 +243,11 @@
         .replace(/\s+/g, '-')
     }
     function strCap(str) {
-      return str.toLowerCase().replace(/\b\w/g, function(char) {
-        return char.toUpperCase()
-      })
+      return str
+        .toLowerCase()
+        .split('')
+        .map((char, i, arr) => (i === 0 || arr[i - 1] === ' ') ? char.toUpperCase() : char)
+        .join('')
     }
     function strCapC(strCourse) {
       let strEC = strCourse.charAt(0).toUpperCase() + strCourse.slice(1).toLowerCase()
@@ -2037,7 +2039,7 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           }
           // ---- ---- ---- ---- SCHEDULE
           let codUni = $('#lblCodigoUniversitario')?.innerText || ''
-          let timesOut = ['240707-240819','241207-250201']
+          let timesOut = ['240707-240816','241207-250201']
           timesOut = timesOut
             .map(function(i) {return i.split('-')})
             .map(function(a) {
@@ -2049,7 +2051,7 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           let isTOut = timesOut.some(function([fa, fb]) { return nD > fa && nD < fb})
           if (top == self && !(/^\d{3}pg/i).test(codUni) && !isTOut) {
             $n('div', 'class::b-sc', /*html*/`html:
-              <style>.b-sc .msg-pl{text-align:center;color:gray;font-size:13px}</style>
+              <style>.b-sc .msg-pl{text-align:center;color:gray;font-size:13px;margin-top:26px}}</style>
               <div class="msg-pl">Cargando horario...</div>`,
               custom_panel_body
             )
