@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     17.96
-// @description 2024-08-16 21:34
+// @version     17.98
+// @description 2024-12-07 08:18
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -15,8 +15,8 @@
 (function() {
   let loc = location
   if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
-    let CUPvS = 17.94
-    let CUPvT = '@24-07-06 18:00'
+    let CUPvS = 17.98
+    let CUPvT = '@24-12-07 08:18'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -3323,7 +3323,7 @@ filas para una mejor vista</p>'
               b.remove()
             })
           }
-          if (isTOut) {
+          if (isTOut && false) { // temporal fix: remove banners home
             let bOut = $n('div', 'class::b-tout', /*html*/`html:
               <div class="bnn-fimg"><img src="//i.ibb.co/4YtDN2X/24-2-O.jpg"></div>
               <div class="bnn-fimg"><img src="//i.ibb.co/D158sxg/24-2-G.jpg"></div>`,
