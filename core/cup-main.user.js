@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     17.98
+// @version     18.26
 // @description 2024-12-07 08:18
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
@@ -14,8 +14,14 @@
 // ==/UserScript==
 (function() {
   let loc = location
-  if (loc.host.endsWith('usat.edu.pe') && 1 == 1) {
-    let CUPvS = 17.98
+  let cSite = {d: 'usat.edu.pe'}
+  cSite.c = function(strP, strS = '', prt = '') {
+    let prot = 'http'
+    prot = prt == 's' ? prot + 's:' : prt == 'p' ? prot + ':' : prot = ''
+    return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
+  }
+  if (loc.host.endsWith(cSite['d']) && 1 == 1) {
+    let CUPvS = 18.26
     let CUPvT = '@24-12-07 08:18'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
@@ -52,7 +58,7 @@
       window.__CUPupdate = function() {
         scm('dv') && (localStorage['cup-dv-updreq'] = '1')
         scm('aa,ce') && (localStorage['cup-iup'] = '1')
-        location.href = '//campus.usat.edu.pe'
+        location.href = lSitesU['main']
       }
     }
     if (localStorage['cup-dvm'] == '1') {
@@ -133,7 +139,7 @@
         let [a, v] = at.split('::')
         n.setAttribute(a, v)
       })
-      w && ('ddbb' == w && (w = document.body),'ddhh' == w && (w = document.head), w.appendChild(n))
+      w && ('ddbb' == w && (w = document.body), 'ddhh' == w && (w = document.head), w.appendChild(n))
       return n
     }
     function setStyle(css, attr = 'und', r = false) {
@@ -189,7 +195,6 @@
       function handleMouseMove(event) {
         if (!isScrolling) return
         e2a.setAttribute('prol', '')
-    
         const deltaY = event.type === 'touchmove' ? event.touches[0].clientY - startY : event.clientY - startY
         const newTopValue = parseFloat(e2a.style.top) + deltaY / window.innerHeight * 100
         const roundedTopValue = Math.round(newTopValue * 100) / 100
@@ -271,12 +276,202 @@
         c++
       }, 1e2)
     }
+    function validCIZ() {
+      let css_cvw = $('style[css-cup=css-cup-imgvieweropts]')
+      if (!css_cvw) {
+        setStyle(/*css*/`.imgvw-btns-opts{position:absolute;left:10px;top:10px;z-index:100;background:white;
+border:none;border-radius:5px;display:flex;padding:0px 2px;box-shadow:0 1px 4px 1px rgba(0, 0, 0, 0.15);transition:
+box-shadow 0.2s ease}.imgvw-btns-opts:hover{box-shadow:0 1px 4px 1px rgba(0, 0, 0, 0.3)}.ivbtn-o{background:
+none;border:none;cursor:pointer;padding:8px 10px;transition:all 0.2s}.ivbtn-o:hover{background-color:#00000015}
+.ivbtn-o svg{height:14px}[ivci]{position:relative;margin-inline:auto}`, 'css-cup-imgvieweropts')
+      }
+      const ncvw = {'p': 'img-view-q', 's': 'img-view-cont'}
+      const scvw = {'iz': `<svg viewBox="0 0 12 12"><path d="M4.88 9.75c-1.38-.03-2.52-.51-3.45-1.43S.03 6.25 0 4.88C.\
+03 3.5.51 2.36 1.43 1.43S3.5.03 4.88 0C6.26.03 7.4.51 8.33 1.43s1.4 2.07 1.43 3.45c-.02 1.17-.37 2.18-1.05 3.02l3.14 \
+3.14c.22.27.22.53 0 .8-.27.22-.53.22-.8 0L7.91 8.7c-.84.69-1.85 1.04-3.02 1.05zm0-8.62c-.67 0-1.3.16-1.88.49-.58.34-1.\
+04.8-1.38 1.38-.33.59-.49 1.22-.49 1.88s.16 1.28.49 1.88c.34.58.8 1.04 1.38 1.38.58.33 1.2.49 1.88.49s1.3-.16 1.88-.49\
+c.58-.34 1.04-.8 1.38-1.38.33-.59.49-1.22.49-1.88S8.47 3.6 8.14 3c-.34-.58-.8-1.04-1.38-1.38-.58-.33-1.2-.49-1.88-.\
+49zm-.56 5.81v-1.5h-1.5c-.34-.03-.53-.22-.56-.56.03-.34.22-.53.56-.56h1.5v-1.5c.03-.34.22-.53.56-.56.34.03.53.22.56.\
+56v1.5h1.5c.34.03.53.22.56.56-.03.34-.22.53-.56.56h-1.5v1.5c-.03.34-.22.53-.56.56-.34-.03-.53-.22-.56-.56z"/></svg>`,
+      'ix': '<svg viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 \
+210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 \
+12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>'}
+      const qcvw = $$('[' + ncvw['p'] + ']')
+      qcvw.forEach(function (qcv) {
+        const maxZoom = qcv.getAttribute(ncvw['p']) * 1 || 4
+        qcv.removeAttribute(ncvw['p'])
+        qcv.setAttribute(ncvw['s'], '')
+        const imgEC = qcv.qsf('img')
+        const imgSrc = imgEC.src
+        const innerCont = $n('div', 'ivci::', '', qcv)
+        innerCont.appendChild(imgEC)
+        const zoomButtonContainer = $n('div', 'class::imgvw-btns-opts', '', innerCont)
+        const zoomButton = $n('button', 'class::ivbtn-o', 'html:' + scvw['iz'], zoomButtonContainer)
+        const removeButton = $n('button', 'class::ivbtn-o', 'html:' + scvw['ix'], zoomButtonContainer)
+
+        zoomButton.addEventListener('click', function (e) {
+          e.preventDefault()
+          const zoomImgModal = $n('div', 'class::zoom-overlay', '', 'ddbb')
+          const fullImg = $n('img', 'src::' + imgSrc, '', zoomImgModal)
+          const closeButton = $n('button', 'class::close-btn-ivwc', 'Cerrar', zoomImgModal)
+
+          const cssIVC = setStyle(/*css*/`.zoom-overlay{opacity:1;position:fixed;left:0;top:0;width:100%;
+height:100%;background-color:rgba(0,0,0,0.8);z-index:9999999999;cursor:grab}.zoom-overlay img{max-width:
+100%;max-height:100%;transform-origin:0px 0px;width:auto;height:auto}.zoom-overlay img:not(.ready){opacity:
+0;transition:opacity 0.4s}.zoom-overlay img.ready{transition:transform 0.15s ease}.close-btn-ivwc{position:
+absolute;top:10px;left:50%;transform:translateX(-50%);z-index:1000;background:#00000060;color:white;
+line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`, 'css-cup-imgviewercont', true)
+          zoomImgModal.appendChild(cssIVC)
+          var scale = 1,
+            minScale = 0.3,
+            maxScale = parseInt(maxZoom),
+            panning = false,
+            pointX = 0,
+            pointY = 0,
+            start = { x: 0, y: 0 },
+            closing = false
+          function setTransform() {
+            fullImg.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`
+          }
+          function centerImage() {
+            const rect = fullImg.getBoundingClientRect()
+            const viewportWidth = window.innerWidth
+            const viewportHeight = window.innerHeight
+            pointX = (viewportWidth - rect.width) / 2
+            pointY = (viewportHeight - rect.height) / 2
+            fullImg.style.opacity = 1
+            setTimeout(function() {
+              fullImg.classList.add('ready')
+            }, 5e2)
+            setTransform()
+          }
+          zoomImgModal.onmousedown = function (e) {
+            if (closing) { return }
+            e.preventDefault()
+            start = { x: e.clientX - pointX, y: e.clientY - pointY }
+            panning = true
+            zoomImgModal.style.cursor = 'grabbing'
+          }
+          zoomImgModal.onmouseup = function (e) {
+            if (closing) { return }
+            panning = false
+            zoomImgModal.style.cursor = 'grab'
+          }
+          zoomImgModal.onmousemove = function (e) {
+            if (closing) { return }
+            e.preventDefault()
+            if (!panning) {
+              return
+            }
+            pointX = (e.clientX - start.x)
+            pointY = (e.clientY - start.y)
+            setTransform()
+          }
+          zoomImgModal.onwheel = function (e) {
+            if (closing) { return }
+            e.preventDefault()
+            var xs = (e.clientX - pointX) / scale
+            var ys = (e.clientY - pointY) / scale
+            var delta = (e.wheelDelta ? e.wheelDelta : -e.deltaY)
+            if (delta > 0) {
+              scale += 0.2
+              if (scale > maxScale) {
+                scale = maxScale
+              }
+            } else {
+              scale -= 0.2
+              if (scale < minScale) {
+                scale = minScale
+              }
+            }
+            pointX = e.clientX - xs * scale
+            pointY = e.clientY - ys * scale
+            setTransform()
+          }
+          let touchStartDist = 0
+          let lastTouchCenter = { x: 0, y: 0 }
+          function getDistance(touches) {
+            const dx = touches[0].clientX - touches[1].clientX
+            const dy = touches[0].clientY - touches[1].clientY
+            return Math.sqrt(dx * dx + dy * dy)
+          }
+          function getTouchCenter(touches) {
+            return {
+              x: (touches[0].clientX + touches[1].clientX) / 2,
+              y: (touches[0].clientY + touches[1].clientY) / 2
+            }
+          }
+          zoomImgModal.ontouchstart = function (e) {
+            if (closing) { return }
+            if (e.touches.length === 2) {
+              touchStartDist = getDistance(e.touches)
+              lastTouchCenter = getTouchCenter(e.touches)
+            } else if (e.touches.length === 1) {
+              start = { x: e.touches[0].clientX - pointX, y: e.touches[0].clientY - pointY }
+              panning = true
+              zoomImgModal.style.cursor = 'grabbing'
+            }
+          }
+          zoomImgModal.ontouchmove = function (e) {
+            if (closing) { return }
+            e.preventDefault()
+            if (e.touches.length === 2) {
+              const currentDist = getDistance(e.touches)
+              const touchCenter = getTouchCenter(e.touches)
+              const deltaScale = currentDist / touchStartDist
+              scale *= deltaScale
+              pointX = touchCenter.x - (touchCenter.x - pointX) * deltaScale
+              pointY = touchCenter.y - (touchCenter.y - pointY) * deltaScale
+              touchStartDist = currentDist
+              lastTouchCenter = touchCenter
+              setTransform()
+            } else if (e.touches.length === 1 && panning) {
+              pointX = e.touches[0].clientX - start.x
+              pointY = e.touches[0].clientY - start.y
+              setTransform()
+            }
+          }
+          zoomImgModal.ontouchend = function (e) {
+            if (closing) { return }
+            if (e.touches.length < 2) {
+              panning = false
+              zoomImgModal.style.cursor = 'grab'
+            }
+          }
+          closeButton.addEventListener('click', function () {
+            closing = true
+            let centerX = (window.innerWidth / 2) - (fullImg.offsetWidth * 0.2 / 2)
+            let centerY = (window.innerHeight / 2) - (fullImg.offsetHeight * 0.2 / 2)
+            let centerTransform = `translate(${centerX}px, ${centerY}px)`
+            closeButton.remove()
+            fullImg.style.transition = 'transform 0.8s ease'
+            fullImg.style.transform = centerTransform + ' scale(0.2)'
+            zoomImgModal.style.transition = 'opacity 0.9s ease 0.2s'
+            zoomImgModal.style.opacity = '0'
+            setTimeout(function () {
+              zoomImgModal.remove()
+            }, 1000)
+          })
+          setTimeout(function() {
+            centerImage()
+          }, 80)
+        })
+        removeButton.addEventListener('click', function (e) {
+          e.preventDefault()
+          zoomButtonContainer.remove()
+        })
+      })
+    }
     // ---- ---- ID SITE
+    let lSitesU = {
+      'main': cSite.c('intranet', 'campusestudiante/Main.aspx'),
+      'campus': cSite.c('campus')
+    }
     let locSite = ''
     if (locSite == '') {
       let dir = loc.pathname.toLowerCase()
       if (dir.endsWith('campusestudiante/') || dir.endsWith('campusestudiante/default.aspx')) {
-        if (loc.search.includes('Tipo')) { // ?Tipo=Mg==
+        if (loc.search.includes('Tipo')) { //note:?Tipo=Mg==
           locSite = 'ls_loginLastC_Egre'
         } else {
           locSite = 'ls_loginLastC'
@@ -332,7 +527,8 @@
     // ---- ---- MANIFEST
     atDomReady(true, function() {
       let bui = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgur.com%2F'
-      let lh = 'https://intranet.usat.edu.pe'
+      let lh = cSite.c('intranet', '', 's')
+      console.log(lh)
       let jsmf = JSON.stringify({"background_color":"#fcc0c4",
         "description":"Campus Virtual USAT, con mejoras",
         "dir":"ltr","display":"standalone","name":"Campus USAT PRO",
@@ -427,7 +623,7 @@
             })
           })
           let config = { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] }
-          
+
           observer.observe(document.body, config)
           function observeIframeSrc(iframe) {
             let iframeObserver = new MutationObserver(function(mutations) {
@@ -762,22 +958,13 @@ color:#fff}.fr{display:flex;align-items:center}`
       }
     })
     // ---- ---- REDIRECT FROM EGRE
-    atDomReady('ls_loginLastC', function() {
-      if (document.body.textContent.toLowerCase().includes('egresado')) {
-        toastMSG(
-          'Este es el formulario de acceso para egresados, ¿desea ir al de estudiantes?',
-          '<a target="_top" href="//campus.usat.edu.pe">Sí</a>',
-          7e3
-        )
-      }
-    })
-    atDomReady('ls_loginLastC_Egre', function() {
+    atDomReady(true, function() {
       toastMSG(
         'Este es el formulario de acceso para egresados, ¿desea ir al de estudiantes?',
-        '<a target="_top" href="//campus.usat.edu.pe">Sí</a>',
+        '<a target="_top" href="' + lSitesU['main'] + '">Sí</a>',
         7e3
       )
-    })
+    }, (locSite == 'ls_loginLastC' || locSite == 'ls_loginLastC_Egre'))
     atDomReady('ls_loginLastLastC', function() {
       let t2rw = $('form[name="frmAcceso"] table')
       if (t2rw) {
@@ -787,7 +974,7 @@ color:#fff}.fr{display:flex;align-items:center}`
           </tr>
           <tr bgcolor="#DECE9C">
             <td width="100%" align="center" class="nll">
-              <a href="//campus.usat.edu.pe">Ir al formulario de acceso</a>
+              <a href="${lSitesU['main']}">Ir al formulario de acceso</a>
             </td>
           </tr>
         </tbody>
@@ -816,34 +1003,7 @@ box-shadow:none}[data-region="recentlyaccessedcourses-view-content"] .card.dashb
 .block-cards .course-info-container a.aalink.coursename{padding: 0.8rem}
 .block-cards .course-info-container .ml-auto.dropdown{display: none}`],
         ['ls_av.course,ls_av.mod', /*css*/`iframe#contentframe{height:80vh !important}.resourcecontent.resourcepdf,
-#resourceobject{height:100vh}`],
-        ['ls_loginLastC', /*css*/`h1.heading img{width:auto !important}center #centeripod{padding-block-start:14px;
-max-width:460px;border:none;min-width:280px !important;border-radius:8px;width:100% !important}div#loginalumni_tab input
-{padding-left:16px}#proindex{user-select:none;font-size:14px;color:#4b4210;margin-block-start:6px;background-color:
-#decda1;padding:6px 0px;position:absolute;left:0px;right:0px;width:100%;border-radius:8px 8px 0px 0px;top:0px;margin:
-0px;background-image:repeating-linear-gradient(134deg in oklab, #ffcf2b, #fcc126 27px);z-index:0;cursor:pointer}
-a#lnkbtnIngresar1{padding:12px;border-radius:4px;margin-top:8px}ul.nav.nav-tabs.piluku-tabs{display:none}
-@media (min-height:601px){form>.col-ld-12.col-md-12>center{height:100%;display:flex;align-items:center;justify-content:
-center;}}@media (max-height:600px){form>.col-ld-12.col-md-12>center{padding-block:30px}}body,html{background:#f3f3f3}
-a#aclave{margin-top:10px}div > h1.heading:last-child img{height:16px !important}form#frmLogin{display:flex;height:100vh}
-@media (min-height:780px){form#frmLogin{padding-bottom:120px}}.reload-btn{position:fixed;left:0;right:0;top:0;
-display:flex}.reload-btn a{margin:auto;background-color:#f3f3f3;padding:4px 14px;border-radius:0 0 6px 6px;color:
-#7e7e7e;border-style:solid;border-color:#b6b6b6;border-width:0 1px 1px 1px;cursor:pointer;transition:all 0.5s;
-transform:translateY(-100%)}.reload-btn a:hover{text-decoration:none;background-color:#e8e8e8}.reload-btn.v a{
-transform:none}.cont-autologin-inf b{font-weight: bold}.btn-opt-sd{position:relative;flex:1;user-select:none}
-.btn-opt-sd .inbol{border-style:solid;border-width:1px;border-color:#d0d0d0;color:#9c9c9c;border-radius:4px;
-background-color:#fff;cursor:pointer;transition:all .3s;text-wrap:nowrap;font-size:12px;display:flex;align-items:
-center;justify-content:center;overflow:hidden}.btn-opt-sd .inbol span{white-space:nowrap}.btn-opt-sd.act .inbol{
-border-color:#3d3d3d;color:#fafafa;background-color:#262626}.btn-opt-sd:not(.act):hover .inbol{background-color:
-#cacaca;color:#5a5a5a;border-color:#868686}.cont-sdb{display:flex;flex-wrap:wrap;gap:4px;width:min-content;margin:
-auto}.btn-opt-sd:not(.act):hover .val{color:#414141;background-color:#9e9e9e}.sett-sd{margin-block-start:14px}
-.btn-opt-sd span{padding:2px 8px}.btn-opt-sd span.val{background-color:#e7e7e7;color:#414141;transition:
-all .3s}.btn-opt-sd span.val i{margin-inline-start:8px}.fsel{position:absolute;top:-4px;left:0;background-color:
-#fff;border-style:solid;border-width:1px;border-color:#ededed;border-radius:4px;width:100%;display:flex;
-flex-direction:column;gap:2px;box-shadow:0 2px 6px 0 #0000002e;overflow:auto;max-height:90vh;transform-origin:
-top;transform:scaleY(.01) translateY(-100%);opacity:0;transition:all .4s}.fsel .o{display:flex;padding:4px 10px;
-cursor:pointer;transition:all .3s}.fsel .o:hover{color:#111;background-color:#00000020}.show-sel .fsel{
-transform:translateY(-100%) scaleY(1);opacity:1}.btn-opt-sd.act span.val{background-color:#d2d2d2}`],
+#resourceobject{height:100vh}`],// oldfn_46
         ['ls_loginRecentC', /*css*/`.fixed-image-message{display:none}`],
         ['ls_campusMain', /*css*/`*{box-sizing:border-box;font-family:system-ui}#bodyPrincipal{padding-right:
 0px !important}*::-webkit-scrollbar,div#divleft.left-bar::-webkit-scrollbar{width:10px}*::-webkit-scrollbar-thumb,
@@ -914,7 +1074,7 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
         }
       }
     })
-    
+
     // ---- ---- SET FAVICON
     atDomReady(true, function() {
       let fded = false
@@ -993,7 +1153,10 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
   <div class="form-in" data-fsi="1">
     <div class="form-s margin"></div>
     <div class="form-s" data-fs="1">
-      <a class="btn-reload"><svg viewBox="0 0 512 512"><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"></path></svg></a>
+      <a class="btn-reload"><svg viewBox="0 0 512 512"><path d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14\
+.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.\
+5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-\
+1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"></path></svg></a>
       <div class="himgs">
         <img src="https://i.ibb.co/9Z035J9/cup-nfl-i-1.png">
         <img src="https://i.ibb.co/1JqMwLJ/cup-nfl-i-2.png">
@@ -1022,11 +1185,13 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
     </div>
     <div class="form-s" data-fs="2">
       <div class="sh-b">
-        <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+        <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.\
+5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
         <div class="sh">Atrás</div>
       </div>
       <div class="form-w">
-        <div class="form-w-i">La clave será almacenada para utilizarse en los siguientes inicios de sesión. Asegúrese de escribir las credenciales correctas para evitar errores.<p><a></a></p>
+        <div class="form-w-i">La clave será almacenada para utilizarse en los siguientes inicios de sesión. \
+Asegúrese de escribir las credenciales correctas para evitar errores.<p><a></a></p>
         </div>
       </div>
       <div class="nfl-form-c">
@@ -1043,12 +1208,14 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
     </div>
     <div class="form-s" data-fs="3">
       <div class="sh-b">
-        <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+        <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 \
+12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
         <div class="sh">Atrás</div>
       </div>
       <div class="form-w pcdis-1">
         <p>
-          El servicio de inicio automático se encuentra activado para la cuenta <b id="nfl-dlu"></b>. Al pulsar "desactivar", la cuenta ya no será utlizada y podrá configurar una nueva cuenta o la misma.
+          El servicio de inicio automático se encuentra activado para la cuenta <b id="nfl-dlu"></b>. Al pulsar "desactivar"\
+, la cuenta ya no será utlizada y podrá configurar una nueva cuenta o la misma.
         </p>
       </div>
       <div class="form-w pcdis-2">
@@ -1064,7 +1231,8 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
 <div class="form-bgs"></div>
 <div class="btn-back-nlf">
   <span class="bbnflb"></span>
-  <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+  <svg class="svg-i-close" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 \
+45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
   <span>Atrás</span>
 </div>
         `, 'ddbb')
@@ -1366,11 +1534,7 @@ width:10px;height:10px}.btn-back-nlf:hover{opacity:1;background-color:#ffffff15}
         pcf.parentNode.insertBefore(pcf, pcf.parentNode.children[0])
       }
     }
-    atDomReady('ls_loginLastC', function() {
-      setStyle(/*css*/`html, body {
-        background-color:transparent !important;
-      }`, 'css-fl-float')
-    }, loc.search.includes('fl-float'))
+    // oldfn_29
     // ---- ---- SHOW LAST LOGIN AS FRAME
     atDomReady('ls_loginRecentC', function() {
       let pfd = $('[name="txtUsername"]')
@@ -1406,7 +1570,7 @@ color:White;line-height:28px;display:flex;align-items:center}.al-cbtn button:hov
       atDomReady(true, function() {
         if ($('h1')) {
           if ($('h1').innerText.toLowerCase().includes('error de servidor en la aplicación')) {
-            location.replace('//campus.usat.edu.pe')
+            location.replace(lSitesU['main'])
           }
         }
         if (new RegExp('^el servicio no est.+ disponible$', 'i').test(document.body.textContent.trim())) {
@@ -1427,7 +1591,7 @@ Sigue el <a href="https://whatsapp.com/channel/0029VaaqtvuKLaHfqGedEK40" target=
         }
       }, (locSite == 'ls_loginLastC' || locSite == 'ls_campusMain'))
       // ---- ---- CHECK UPDATES
-      onlyAtLoad('ls_loginLastC', function() {
+      onlyAtLoad('ls_campusMain', function() {
         let kLLU = 'cup-tcv'
         let lV = localStorage[kLLU]
         if (lV) {
@@ -1845,7 +2009,7 @@ all 0.2s;border-radius:4px}.foo-cvp .btn-exp:hover{border-color:#b5b5b5;backgrou
           let custom_panel_body = custom_panel.qsf('.panel-body')
           let ctm_panel_links = $n('div', 'class::links-cont')
           let ctm_panel_version = $n('div', 'class::foo-cvp min')
-          
+
           let custom_panel_bgosec = $n('div', 'class::shortcuts-sections,,style::display:none')
           if (typeof (boardHomeNative.scrollIntoView) == 'function') {
             let btnGoSections = [
@@ -1885,7 +2049,7 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
             ['Plan de estudio', 'ion-calendar', 'planesestudio.aspx'],
             ['Pagos en línea', 'ion-card', 'MediosPago/frmMedioPago.aspx'],
             ['Movimientos', 'ion-ios-cart', 'SDEestadocuenta.aspx'],
-            ['Anuncios', 'ion-ios-paper', 'http://www.usat.edu.pe/anuncios/index.php?pagina=usat&e=2&c=3'],
+            ['Anuncios', 'ion-ios-paper', cSite.c('www','anuncios/index.php?pagina=usat&e=2&c=3','p')],
             ['Usat informa', 'ion-social-tumblr', '//usatininforma.usat.pe/'],
             ['Usatin', 'ion-chatboxes', '//t.me/USATIN_bot'],
             ['Mostrar carnet', 'ion-image', function() {
@@ -2039,7 +2203,7 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           }
           // ---- ---- ---- ---- SCHEDULE
           let codUni = $('#lblCodigoUniversitario')?.innerText || ''
-          let timesOut = ['240707-240816','241207-250201']
+          let timesOut = ['240707-240816','241207-250317']
           timesOut = timesOut
             .map(function(i) {return i.split('-')})
             .map(function(a) {
@@ -2049,6 +2213,21 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
             })
           let nD = new Date() * 1
           let isTOut = timesOut.some(function([fa, fb]) { return nD > fa && nD < fb})
+          function showBannersTOut() {
+            let bOut = $n('div', 'class::b-tout', /*html*/`html:
+              <div class="bnn-fimg" img-view-q="4"><img src="//i.ibb.co/fnhjbRR/programacion-usat-25-0.jpg"></div>
+              <div class="bnn-fimg" img-view-q="4"><img src="//i.ibb.co/YdvtrsW/programacion-usat-25-1.jpg"></div>`,
+              custom_panel_body
+            )
+            bOut.appendChild(setStyle(/*css*/`
+              .b-tout{margin-top:28px}
+              .bnn-fimg{margin-top:12px;display:flex}
+              .b-tout .bnn-fimg img{margin:0 auto;max-width:760px;width:100%;height:auto}
+              `, 'css-cup-plann', true)
+            )
+            validCIZ()
+          }
+          // GET COURSES DATA AND PRINT
           if (top == self && !(/^\d{3}pg/i).test(codUni) && !isTOut) {
             $n('div', 'class::b-sc', /*html*/`html:
               <style>.b-sc .msg-pl{text-align:center;color:gray;font-size:13px;margin-top:26px}}</style>
@@ -3081,7 +3260,7 @@ filas para una mejor vista</p>'
                   let tb = tbl_b
                   tbl_h.style.transform = 'translateX(-' + (tb.scrollLeft) + 'px)'
                   tbl_i.style.transform = 'translateY(-' + (tb.scrollTop) + 'px)'
-                  let fx = tb.scrollWidth - (tb.clientWidth + tb.scrollLeft) 
+                  let fx = tb.scrollWidth - (tb.clientWidth + tb.scrollLeft)
                   let fy = tb.scrollHeight - (tb.clientHeight + tb.scrollTop)
                   let ct = $('.cont-s-t-s')
                   let bp = ''
@@ -3299,20 +3478,33 @@ filas para una mejor vista</p>'
                   pd = $('#divContent')
                 }
                 pd.appendChild(d)
-                fetch('cursosmatriculados.aspx').then(function(r) {
-                  r.text().then(function(t) {
-                    d.innerHTML = t
-                    fetch('procesar.aspx?param0=lstTaller').then(function(r) {
-                      r.text().then(function(talleresRaw) {
-                        let arrTalleres = JSON.parse(talleresRaw)
-                        arrTalleres.forEach(function(taller) {
-                          let strTD = 'html:<td taller>' + taller['nomCurso'] + '</td><td></td>'
-                          $n('tr', 'role::row,,id::' + taller['cur'], strTD, d.qsf('#tbCursos'))
-                        })
-                        trCourses2Data()
-                      })
-                    })
+                fetch('cursosmatriculados.aspx')
+                .then(function(r) {
+                  if (!r.ok) {
+                    throw new Error(`No se pudo obtener información de matrícula`)
+                  }
+                  return r.text()
+                })
+                .then(function(t) {
+                  d.innerHTML = t
+                  return fetch('procesar.aspx?param0=lstTaller')
+                })
+                .then(function(r) {
+                  if (!r.ok) {
+                    throw new Error(`No se pudo obtener información de matrícula de cursos de verano`)
+                  }
+                  return r.text();
+                })
+                .then(function(talleresRaw) {
+                  let arrTalleres = JSON.parse(talleresRaw)
+                  arrTalleres.forEach(function(taller) {
+                    let strTD = 'html:<td taller>' + taller['nomCurso'] + '</td><td></td>'
+                    $n('tr', 'role::row,,id::' + taller['cur'], strTD, d.qsf('#tbCursos'))
                   })
+                  trCourses2Data()
+                })
+                .catch(function(error) {
+                  showFail(error.message)
                 })
               } catch (e) {
                 showFail('Error al obtener los datos de su horario')
@@ -3323,18 +3515,8 @@ filas para una mejor vista</p>'
               b.remove()
             })
           }
-          if (isTOut && false) { // temporal fix: remove banners home
-            let bOut = $n('div', 'class::b-tout', /*html*/`html:
-              <div class="bnn-fimg"><img src="//i.ibb.co/4YtDN2X/24-2-O.jpg"></div>
-              <div class="bnn-fimg"><img src="//i.ibb.co/D158sxg/24-2-G.jpg"></div>`,
-              custom_panel_body
-            )
-            bOut.appendChild(setStyle(/*css*/`
-              .b-tout{margin-top:28px}
-              .bnn-fimg{margin-top:12px;display:flex}
-              .b-tout .bnn-fimg img{margin:0 auto;max-width:760px;width:100%;height:auto}
-              `, 'css-cup-plann', true)
-            )
+          if (isTOut) {
+            showBannersTOut()
           }
           // ---- ---- ---- ---- CUP FORMS
           if (!0) {
@@ -3680,7 +3862,7 @@ iframe.moodle-float.show{transform:none}`, 'css-cup-avframe', true)
             ])
           }
         }
-      }, 5e2)    
+      }, 5e2)
     })
     // ---- ---- TITLE FOR CONTENT COURSES
     atDomReady(loc.pathname.includes('/aulavirtual/'), function() {
@@ -3973,7 +4155,7 @@ background-color:#828282}div#intro{padding: 0px 10px !important}`
       itms.a.addEventListener('click', function() {zoomv += stepCh;setZoom(zoomv)})
       itms.s.addEventListener('dblclick', function() {zoomv = 90;setZoom(zoomv)})
       document.body.appendChild(czoom)
-      
+
     }, new URLSearchParams(location.search).get('preview'))
     // ---- ---- FOR PREVENT LOAD YOUTUBE VIDEOS FRAMES
     atDomReady('ls_anuncios', function() {
@@ -4055,7 +4237,7 @@ background-clip:padding-box;border:2px solid rgba(0, 0, 0, 0)}
               runOrwait(msgUI_show, 'Agilizando sitio...', 'yellow', false, 3)
               setTimeout(function() {
                 runOrwait(
-                  msgUI.show, 
+                  msgUI.show,
                   'Se detuvo la carga de ' + countFrames + ' videos que ralentizaban el sitio',
                   'green', false, 4
                 )
@@ -4072,7 +4254,7 @@ background-clip:padding-box;border:2px solid rgba(0, 0, 0, 0)}
           let h = a.getAttribute('href') || ''
           if (h) {
             if (h.startsWith('//') || h.startsWith('http')) {
-              if (!h.includes('usat.edu.pe/')) {
+              if (!h.includes(cSite['d'])) {
                 a.setAttribute('target', '_blank')
               }
             }
