@@ -465,6 +465,7 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
     // ---- ---- ID SITE
     let lSitesU = {
       'main': cSite.c('intranet', 'campusestudiante/Main.aspx'),
+      'defaspx': cSite.c('intranet', 'campusestudiante/Default.aspx'),
       'campus': cSite.c('campus'),
       'h_intranet': cSite.c('intranet')
     }
@@ -825,7 +826,7 @@ background-color:#d4f8ff;border-color:#9fc7cf}.cont-msgui .msg-item.blue:hover{b
 background-color:#fae5e5;border-color:#cf9f9f}.cont-msgui .msg-item.red:hover{border-color:#8b6363}
 .cont-msgui .msg-item.yellow{background-color:#fffcd4;border-color:#cfcd9f}.cont-msgui .msg-item.yellow:hover{
 border-color:#878565}.cont-msg{padding:4px 12px;margin-top:4px;overflow:hidden;display:flex;align-items:center;
-font-size:16px;line-height:1.3;}.bar-timeout{height:4px;backdrop-filter: saturate(3.5) brightness(0.85);
+font-size:15px;line-height:1.4;}.bar-timeout{height:4px;backdrop-filter: saturate(3.5) brightness(0.85);
 animation-name:closeBar;animation-fill-mode:forwards;animation-delay:0s;
 animation-timing-function:linear}@keyframes closeBar{from{width:100%}to{width:0}}
 .cont-msgui .msg-item.closing{transition:height 1s;height:0px !important;border-width:0px !important;
@@ -962,7 +963,7 @@ color:#fff}.fr{display:flex;align-items:center}`
     atDomReady(true, function() {
       toastMSG(
         'Este es el formulario de acceso para egresados, ¿desea ir al de estudiantes?',
-        '<a target="_top" href="' + lSitesU['main'] + '">Sí</a>',
+        '<a target="_top" href="' + lSitesU['campus'] + '">Sí</a>',
         7e3
       )
     }, (locSite == 'ls_loginLastC' || locSite == 'ls_loginLastC_Egre'))
@@ -1149,7 +1150,9 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
         let simSbmt = function(u, p) {
           iptU.value = u
           iptP.value = p
-          fetch(lSitesU['h_intranet'])
+          fetch(lSitesU['defaspx'], {
+            method: 'GET',
+          })
           .then(response => {
             if (!response.ok) {
               const errorMessages = [
@@ -1178,7 +1181,7 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
           })
           setTimeout(function() {
             msgUI.show('Pasó más tiempo de lo esperado, validando que el servidor esté activo', 'yellow', false, 18)
-          }, 5e3)
+          }, 8e3)
           iptS.click()
         }
         let mel = window['_menclib']
