@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.26
-// @description 2024-12-07 08:18
+// @version     18.28
+// @description 2024-12-29 22:10
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.26
-    let CUPvT = '@24-12-07 08:18'
+    let CUPvS = 18.28
+    let CUPvT = '@24-12-29 22:10'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -465,7 +465,8 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
     // ---- ---- ID SITE
     let lSitesU = {
       'main': cSite.c('intranet', 'campusestudiante/Main.aspx'),
-      'campus': cSite.c('campus')
+      'campus': cSite.c('campus'),
+      'h_intranet': cSite.c('intranet')
     }
     let locSite = ''
     if (locSite == '') {
@@ -822,10 +823,10 @@ background-color:#d4f8ff;border-color:#9fc7cf}.cont-msgui .msg-item.blue:hover{b
 .cont-msgui .msg-item.green{background-color:#d4ffd9;border-color:#9fcfa2}
 .cont-msgui .msg-item.green:hover{border-color:#6f9c72}.cont-msgui .msg-item.red{
 background-color:#fae5e5;border-color:#cf9f9f}.cont-msgui .msg-item.red:hover{border-color:#8b6363}
-.cont-msgui .msg-item.yellow{background-color:#fffcd4;border-color:#cfcd9f}
-.cont-msgui .msg-item.yellow:hover{border-color:#878565}.cont-msg{padding:4px 12px;margin-top:4px;
-overflow:hidden;display:flex;align-items:center}.bar-timeout{height:4px;backdrop-filter: saturate(3.5) 
-brightness(0.85);animation-name:closeBar;animation-fill-mode:forwards;animation-delay:0s;
+.cont-msgui .msg-item.yellow{background-color:#fffcd4;border-color:#cfcd9f}.cont-msgui .msg-item.yellow:hover{
+border-color:#878565}.cont-msg{padding:4px 12px;margin-top:4px;overflow:hidden;display:flex;align-items:center;
+font-size:16px;line-height:1.3;}.bar-timeout{height:4px;backdrop-filter: saturate(3.5) brightness(0.85);
+animation-name:closeBar;animation-fill-mode:forwards;animation-delay:0s;
 animation-timing-function:linear}@keyframes closeBar{from{width:100%}to{width:0}}
 .cont-msgui .msg-item.closing{transition:height 1s;height:0px !important;border-width:0px !important;
 border-color:transparent !important;padding-top:0 !important;padding-bottom:0 !important;
@@ -944,7 +945,7 @@ color:#fff}.fr{display:flex;align-items:center}`
             linkUP = linkUP.replace('@', 'campus-usat-pro.apk')
             if (window.__CUPmV != CUPvSaa) {
               clog(window.__CUPmV)
-              clog(window.__CUPvSaa)
+              clog(CUPvSaa)
               toastMSG(`:Actualice la app a la versión ${CUPvSaa} ${linkUP}`, '-', 4e3)
             }
           }
@@ -1142,9 +1143,39 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
         if (typeof(preFn) == 'function') {
           preFn()
         }
+        function showErrNetwrk(strErrMessage) {
+          msgUI.show(strErrMessage, 'red', true, 10)
+        }
         let simSbmt = function(u, p) {
           iptU.value = u
           iptP.value = p
+          fetch(lSitesU['h_intranet'])
+          .then(response => {
+            if (!response.ok) {
+              const errorMessages = [
+                '400=Error:  de solicitud. Intente nuevamente.',
+                '401=Error: El servidor no le concedió acceso al recurso.',
+                '403=Error: El servidor no le concedió acceso al recurso.',
+                '404=Error: Recurso del servidor no disponible.',
+                '500=Error interno del servidor: Por favor, intenta más tarde.',
+                '503=Error: el servidor está temporalmente fuera de servicio.'
+              ]
+              const errorMessage = errorMessages.find(item => item.split('=')[0] == response.status.toString())
+              showErrNetwrk(`ERROR ${response.status}`)
+              if (errorMessage) {
+                throw new Error(errorMessage.split('=')[1])
+              } else {
+                throw new Error('Error desconocido en la solicitud.')
+              }
+            }
+          })
+          .catch(error => {
+            if (error.message === 'Failed to fetch') {
+              showErrNetwrk('Error: No se pudo establecer conexción con el servidor. Verifica tu conexión a internet o intenta más tarde que el sitio esté disponible.')
+            } else {
+              showErrNetwrk(`${error.message}`)
+            }
+          })
           iptS.click()
         }
         let mel = window['_menclib']
