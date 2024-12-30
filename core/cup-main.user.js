@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.32
+// @version     18.34
 // @description 2024-12-29 22:36
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
@@ -21,7 +21,7 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.32
+    let CUPvS = 18.34
     let CUPvT = '@24-12-29 22:36'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
