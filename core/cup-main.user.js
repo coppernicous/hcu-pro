@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.28
-// @description 2024-12-29 22:10
+// @version     18.32
+// @description 2024-12-29 22:36
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.28
-    let CUPvT = '@24-12-29 22:10'
+    let CUPvS = 18.32
+    let CUPvT = '@24-12-29 22:36'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1171,11 +1171,14 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
           })
           .catch(error => {
             if (error.message === 'Failed to fetch') {
-              showErrNetwrk('Error: No se pudo establecer conexción con el servidor. Verifica tu conexión a internet o intenta más tarde que el sitio esté disponible.')
+              showErrNetwrk('Error: No se pudo establecer conexión con el servidor. Verifica tu conexión a internet o intenta más tarde que el sitio esté disponible.')
             } else {
               showErrNetwrk(`${error.message}`)
             }
           })
+          setTimeout(function() {
+            msgUI.show('Pasó más tiempo de lo esperado, validando que el servidor esté activo', 'yellow', false, 18)
+          }, 5e3)
           iptS.click()
         }
         let mel = window['_menclib']
