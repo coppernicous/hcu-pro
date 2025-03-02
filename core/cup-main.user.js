@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.34
-// @description 2024-12-29 22:36
+// @version     18.36
+// @description 2025-03-02 18:34
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.34
-    let CUPvT = '@24-12-29 22:36'
+    let CUPvS = 18.36
+    let CUPvT = '@25-03-02 18:34'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -2252,7 +2252,6 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           let isTOut = timesOut.some(function([fa, fb]) { return nD > fa && nD < fb})
           function showBannersTOut() {
             let bOut = $n('div', 'class::b-tout', /*html*/`html:
-              <div class="bnn-fimg" img-view-q="4"><img src="//i.ibb.co/fnhjbRR/programacion-usat-25-0.jpg"></div>
               <div class="bnn-fimg" img-view-q="4"><img src="//i.ibb.co/YdvtrsW/programacion-usat-25-1.jpg"></div>`,
               custom_panel_body
             )
