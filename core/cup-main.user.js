@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.36
-// @description 2025-03-02 18:34
+// @version     18.38
+// @description 2025-03-02 20:16
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.36
-    let CUPvT = '@25-03-02 18:34'
+    let CUPvS = 18.38
+    let CUPvT = '@25-03-02 20:16'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1872,7 +1872,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
             } else if (posMdls.g) {
               posMdls.g.qsf('.h button').click()
             } else {
-              $('#homeReset').click()
+              // $('#homeReset').click()
             }
             return true
           } else {
