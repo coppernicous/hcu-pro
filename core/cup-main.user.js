@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.38
-// @description 2025-03-02 20:16
+// @version     18.42
+// @description 2025-03-03 09:40
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.38
-    let CUPvT = '@25-03-02 20:16'
+    let CUPvS = 18.42
+    let CUPvT = '@25-03-03 09:40'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1060,7 +1060,8 @@ li.inf-acc{font-size:14px;padding:6px;background-color:#ffffff}li.inf-acc .c div
 text-align:center}li.inf-acc .btn2dacc{color:#000;font-weight:700}.inf-acc .c{border-style:solid;border-width:1px;
 border-color:#cecece}li.inf-acc:hover .c{border-color:#000}li.inf-acc:hover .c div{color:#000}
 li.inf-acc:hover .btn2dacc{background-color:#c8c8c8}.top-bar .open a span#lblCodigoUniversitario{color:black !important}
-.btn-close-modal-b{display:block !important}`],
+.btn-close-modal-b{display:block !important}#mdlActualizarClave button.close span.ti-close{
+color:black !important}#mdlActualizarClave button.close{opacity:.6 !important}`],
         ['ls_calificaciones', /*css*/`.col-xs-12,.col-xs-12 > * > *,.container-fluid,.panel.panel-body{padding:0 !important}
 @media (max-width:599px){.form-group{display:flex;flex-direction:column;align-items:stretch;margin-bottom:0}
 .row .form-group{margin:0px}.form-group *{width:100% !important}}@media (min-width:600px){.form-group{display:flex;
@@ -1910,7 +1911,8 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['mt:Evaluación de Desempeño Docente', '.row', 'Aviso evaluación desempeño docente'],
           ['mt:PLAN MAESTRO USAT', '.row', 'Encuesta plan maestro USAT'],
           ['#divAvisoCreditoAlumno', '.row', 'Aviso créditos'],
-          ['mt:nadores Encuesta Plan Maestro', '.row', 'Ganadores de encuesta']
+          ['mt:nadores Encuesta Plan Maestro', '.row', 'Ganadores de encuesta'],
+          ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
           if (item) {
