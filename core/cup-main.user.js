@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.44
-// @description 2025-03-06 21:52
+// @version     18.46
+// @description 2025-03-24 16:02
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.44
-    let CUPvT = '@25-03-06 21:52'
+    let CUPvS = 18.46
+    let CUPvT = '@25-03-24 16:02'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -30,6 +30,7 @@
       supVm = top.__CUPm
     } catch (e) {
       supVm = false
+
     }
     window.__CUPm = window.__CUPm || supVm || 'dv'
     let um = window.__CUPm, hlog = []
@@ -1015,7 +1016,7 @@ border:2px solid rgba(0, 0, 0, 0)}*::-webkit-scrollbar-thumb:hover,div#divleft.l
 div#divleft.left-bar::-webkit-scrollbar-thumb:active{background-color:rgba(0, 0, 0, 0.29)}body{--alto:
 calc(100vh - 70px)}#divContent .row.grid.col-md-12{overflow:auto;height:calc(var(--alto) - 1px)}.wrapper{
 min-height:var(--alto)}@media (min-width:992px){#divContent .row.grid.col-md-12 .col-md-4,#divContent .row.grid
-.col-md-12 .col-md-8{height:calc(var(--alto) - 8px);overflow:auto}}a#lnkCiclo{display:none}
+.col-md-12 .col-md-8{height:calc(var(--alto) - 8px);overflow:auto}}
 object#anuncio{height:calc(var(--alto) - 120px) !important;
 overflow:auto !important}div#div_anuncio_bd{height:calc(var(--alto) - 81px);overflow-y:auto;overflow-x:hidden}
 .panel.panel-piluku{margin:0}@media (min-width:1200px){div#divleft{overflow-y:auto !important;z-index:555;display:flex;
@@ -1036,10 +1037,10 @@ transform:scale(0.75);transform-origin:top left}#div_anuncio_bd iframe:not(.firs
 .avatar_width span.drop-icon{display:none}
 body #content form .top-bar nav.navbar .menu-bar-mobile{z-index:9997 !important}@media (min-width:800px){
 img#imgAvatar{object-fit:contain;background-color:white;;transform:translateX(-4px);height:30px;width:30px}}
+li.piluku-dropdown.lpdHA{display:none !important}
 @media (max-width:680px){.nav #lnkHome,.nav #homeReset{padding:0 12px}.avatar_width .avatar-holder{margin-right:
-0px !important}}@media (max-width:860px){li.piluku-dropdown.dropdown:nth-child(2),
-li.piluku-dropdown.dropdown:nth-child(3),li.piluku-dropdown.dropdown:nth-child(6){display:none !important}
-img#imgAvatar{object-fit:contain;filter:brightness(0.1);height:30px;width:30px}
+0px !important}}@media (max-width:860px){li.piluku-dropdown.lpdHM{display:none !important}
+img#imgAvatar{object-fit:contain;filter:brightness(1);height:30px;width:30px}
 span.avatar_info{display:none !important}span.avatar-holder{width:40px !important}
 ul.nav.navbar-nav.navbar-right.top-elements{float:right;display:flex;justify-content:flex-end}
 ul.nav.navbar-nav.navbar-left.top-elements{float:left;display:none}}ul.dropdown-menu.dropdown-piluku-menu.animated
@@ -1061,7 +1062,11 @@ text-align:center}li.inf-acc .btn2dacc{color:#000;font-weight:700}.inf-acc .c{bo
 border-color:#cecece}li.inf-acc:hover .c{border-color:#000}li.inf-acc:hover .c div{color:#000}
 li.inf-acc:hover .btn2dacc{background-color:#c8c8c8}.top-bar .open a span#lblCodigoUniversitario{color:black !important}
 .btn-close-modal-b{display:block !important}#mdlActualizarClave button.close span.ti-close{
-color:black !important}#mdlActualizarClave button.close{opacity:.6 !important}`],
+color:black !important}#mdlActualizarClave button.close{opacity:.6 !important}
+.panel-body .bguim-c .bmsgi{margin-block-end:6px}.bguim-c{margin-block-end:12px}.bmsgi{border-radius:6px;
+border-style:solid;border-width:1px;padding:6px 12px}.bmsgi.my{border-color:#694b08;color:#675110;
+background-color:#ffffe9}.bmsgi.mw{border-color:#bbbbbb;color:#585858;background-color:#f9f9f9}
+.bmsgi.mr{border-color:#690808;color:#671010;background-color:#ffe9e9}.bmsgi > i{margin-inline-end:8px}`],
         ['ls_calificaciones', /*css*/`.col-xs-12,.col-xs-12 > * > *,.container-fluid,.panel.panel-body{padding:0 !important}
 @media (max-width:599px){.form-group{display:flex;flex-direction:column;align-items:stretch;margin-bottom:0}
 .row .form-group{margin:0px}.form-group *{width:100% !important}}@media (min-width:600px){.form-group{display:flex;
@@ -2003,6 +2008,20 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
             adIfr.style.display = 'none'
           }
         }, 50)
+        // ---- ---- ---- BTN HEADER ADD CLASS TO HID
+        if (!0) {
+          let arrBUH = ["#lblTiempoClave::HA", "#lnkMail::HM", "#lnkCiclo::HM", "#ulNoty::HM"];
+          $$('.nav.navbar-nav.top-elements.navbar-right .piluku-dropdown.dropdown')
+            .forEach(function(nbi) {
+              arrBUH.forEach(entry => {
+                let [iqs, clss2h] = entry.split("::")
+                let if2h = nbi.qsf(iqs)
+                if (if2h) {
+                  nbi.classList.add('lpd' + clss2h)
+                }
+              })
+            })
+        }
         // ---- ---- ---- EVENT ACTION HOME BTN
         setTimeout(function() {
           let btnHome = $('#lnkHome')
@@ -2123,6 +2142,26 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
             }
             ctm_panel_links.appendChild(a)
           })
+          // ---- ---- ---- ---- TIME TO CHANGE KEY
+          if (!0) {
+            let msgTime2CKc = $n('div', 'class::bguim-c', '', custom_panel_body)
+            fetch("procesar.aspx?param0=cargarMdlPass").then(function(r) {
+              r.json().then(function(t) {
+                let matchTime = t.tiempoRC.match(/\d+/)
+                let nmt = Number(matchTime)
+                let iconCN = nmt > 10 ? 'ion-information-circled' : 'ion-alert-circled'
+                let miCN = nmt < 4 ? 'mr' : nmt < 7 ? 'my' : 'mw'
+                if (matchTime) {
+                  msgTime2CKc.innerHTML = /*html*/`
+                    <div class="bmsgi ${miCN}">
+                      <i class="${iconCN}"></i>
+                      <span>Te quedan </span><b>${matchTime[0]}</b>
+                      <span> días para actualizar tu clave</span>
+                    </div>`
+                }
+              })
+            })
+          }
           // ---- ---- ---- ---- CONTROL VALIDATION
           if (!0) {
             let lastComprbTm = '', lastComprbTx
