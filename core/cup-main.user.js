@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.46
-// @description 2025-03-24 16:02
+// @version     18.48
+// @description 2025-03-31 17:16
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.46
-    let CUPvT = '@25-03-24 16:02'
+    let CUPvS = 18.48
+    let CUPvT = '@25-03-31 17:16'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1039,7 +1039,7 @@ body #content form .top-bar nav.navbar .menu-bar-mobile{z-index:9997 !important}
 img#imgAvatar{object-fit:contain;background-color:white;;transform:translateX(-4px);height:30px;width:30px}}
 li.piluku-dropdown.lpdHA{display:none !important}
 @media (max-width:680px){.nav #lnkHome,.nav #homeReset{padding:0 12px}.avatar_width .avatar-holder{margin-right:
-0px !important}}@media (max-width:860px){li.piluku-dropdown.lpdHM{display:none !important}
+0px !important}}@media (max-width:900px){li.piluku-dropdown.lpdHM{display:none !important}
 img#imgAvatar{object-fit:contain;filter:brightness(1);height:30px;width:30px}
 span.avatar_info{display:none !important}span.avatar-holder{width:40px !important}
 ul.nav.navbar-nav.navbar-right.top-elements{float:right;display:flex;justify-content:flex-end}
@@ -1917,6 +1917,8 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['mt:PLAN MAESTRO USAT', '.row', 'Encuesta plan maestro USAT'],
           ['#divAvisoCreditoAlumno', '.row', 'Aviso créditos'],
           ['mt:nadores Encuesta Plan Maestro', '.row', 'Ganadores de encuesta'],
+          ['#divModal150', '.row', 'Clases presenciales'],
+          ['#divModal151', '.row', 'Ascensores'],
           ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
