@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.48
-// @description 2025-03-31 17:16
+// @version     18.52
+// @description 2025-06-29 21:03
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -2153,14 +2153,26 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
                 let nmt = Number(matchTime)
                 let iconCN = nmt > 10 ? 'ion-information-circled' : 'ion-alert-circled'
                 let miCN = nmt < 4 ? 'mr' : nmt < 7 ? 'my' : 'mw'
-                if (matchTime) {
-                  msgTime2CKc.innerHTML = /*html*/`
-                    <div class="bmsgi ${miCN}">
-                      <i class="${iconCN}"></i>
-                      <span>Te quedan </span><b>${matchTime[0]}</b>
-                      <span> días para actualizar tu clave</span>
-                    </div>`
+                if (matchTime == null) {
+                  iconCN = 'ion-information-circled'
+                  miCN = 'my'
                 }
+                let inBlockMsg = ''
+                if (matchTime) {
+                  inBlockMsg = /*html*/ `
+                    <span>Te quedan </span><b>${matchTime[0]}</b>
+                    <span> días para actualizar tu clave</span>
+                  `
+                } else {
+                  inBlockMsg = /*html*/ `<span>${t.tiempoRC}</span>`
+                }
+                let outBlockMsg = /*html*/`
+                  <div class="bmsgi ${miCN}">
+                    <i class="${iconCN}"></i>
+                    ${inBlockMsg}
+                  </div>
+                `
+                msgTime2CKc.innerHTML = outBlockMsg
               })
             })
           }
