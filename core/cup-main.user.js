@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.52
-// @description 2025-06-29 21:03
+// @version     18.54
+// @description 2025-06-30 21:04
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.48
-    let CUPvT = '@25-03-31 17:16'
+    let CUPvS = 18.54
+    let CUPvT = '@25-06-30 21:04'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1910,6 +1910,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           // /campusestudiante/InstrumentosEvaluacion/VerInstrumentoEvaluacion.aspx
           ['#divModal34', '.row', 'UNKNOW'],
           ['#divAlumnoAvisoCarne', '.row', 'Modal aviso carnet'],
+          ['#divModal165', '.row', 'Encuesta sobre hostigamiento'],
           ['#divAlumnoTermino', '.row', 'Aceptar términos y condiciones de uso de imagen'],
           ['#modalDatos', '.row', 'Actualiza tus datos'],
           ['#divAlumnoTerminoBiblioteca', '.row', 'Términos y condiciones de biblioteca'],
