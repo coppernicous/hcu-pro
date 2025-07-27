@@ -483,6 +483,8 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
       } else if (dir.endsWith('campusvirtual/estudiante/') || dir.endsWith('campusvirtual/estudiante/index.asp')) {
         // $('form[name=frmAcceso]'
         locSite = 'ls_loginLastLastC'
+      } else if (dir.endsWith('alumno.aspx')) {
+        locSite = 'ls_loginRecentR'
       } else if (loc.host.startsWith('campus')) {
         // $('form#enviarData')
         locSite = 'ls_loginRecentC'
@@ -1087,7 +1089,7 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
     atDomReady(true, function() {
       let fded = false
       let faviconsBySites = [
-        'ls_loginLastC,ls_loginRecentC,ls_loginLastLastC,ls_campusMain:iXksnKc',
+        'ls_loginLastC,ls_loginRecentC,ls_loginRecentR,ls_loginLastLastC,ls_campusMain:iXksnKc',
         'ls_moodleClose,ls_moodle:xbwd3Pr',
         'ls_av.course:ewk4kOX',
         'ls_av.assign,ls_av.mod:TkahZ9d'
@@ -1124,7 +1126,7 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
     let baSH = window.__baSH
     // ---- CUSTOM FOR SITES
     // ---- ---- BACK PRESS
-    if (locSite == 'ls_loginRecentC') {
+    if (locSite == 'ls_loginRecentR') {
       window.__baBP = function() {
         let mnfl = $('.nfl-c-form')
         if (mnfl) {
@@ -1579,9 +1581,9 @@ width:10px;height:10px}.btn-back-nlf:hover{opacity:1;background-color:#ffffff15}
     }
     // oldfn_29
     // ---- ---- SHOW LAST LOGIN AS FRAME
-    atDomReady('ls_loginRecentC', function() {
+    atDomReady('ls_loginRecentR', function() {
       let pfd = $('[name="txtUsername"]')
-      pfd && (pfd = pfd.closest('.wpb_column.vc_column_container.vc_col-sm-12'))
+      pfd && (pfd = pfd.closest('[name="frmLogin"]'))
       if (pfd) {
         pfd.appendChild(setStyle(/*css*/`
 .al-cbtn{display:flex;flex-direction:column;align-items:center;justify-content:center}.al-cbtn button{
@@ -1591,11 +1593,12 @@ padding:2px 20px;text-decoration:none;background-position:left;transition:all 0.
 color:White;line-height:28px;display:flex;align-items:center}.al-cbtn button:hover{background-position:
 100%}.cup-sett-al{padding-block-end:8px}.wpb_raw_code.wpb_content_element.wpb_raw_html{margin-bottom:0}
         `, 'css-cup-fsd', true))
-        let bCF = $n('div', 'class::wpb_column vc_column_container vc_col-sm-12 cup-sett-al', '', pfd)
+        let bCF = $n('div', '', '', pfd)
         let cCF = $n('div', 'class::al-cbtn', '', bCF)
         let btnSett = $n('button', '', '', cCF)
         btnSett.innerText = 'Configurar inicio automático'
-        btnSett.on('click', function() {
+        btnSett.on('click', function(e) {
+          e.preventDefault()
           let df = $('.nfl-c-form')
           if (df) {
             mmodal(true)
