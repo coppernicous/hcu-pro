@@ -1610,6 +1610,89 @@ color:White;line-height:28px;display:flex;align-items:center}.al-cbtn button:hov
       }
       createAlternativeFormLogin('[name="txtUsername"]', '[name="txtPassword"]', '#lnkbtnIngresar', 'none')
     })
+    atDomReady('ls_loginRecentC', function() {
+      setStyle(/*css*/`
+        .custom-redirect-banner-container {
+          width: calc(100% - 60px);
+          max-height: 400px;
+          height: 25vh;
+          background-color: #000000c4;
+          backdrop-filter: blur(8px);
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: sans-serif;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+          position: fixed;
+          top: 0px;
+          bottom: auto;
+          border-radius: 0px 0px 30px 30px;
+          left: 30px;
+          right: 30px;
+          z-index: 555;
+        }
+        .custom-redirect-banner-inner {
+          text-align: center;
+        }
+        .custom-redirect-banner-text {
+          padding: 0px 12px;
+          font-size: 16px;
+          color: white;
+          margin-bottom: 1rem;
+        }
+        .custom-redirect-btn {
+          background-color: #ffffff1c;
+          color: #fff;
+          border: none;
+          padding: 4px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 13px;
+        }
+        .custom-redirect-btn:hover {
+          background-color: #ffffff80;
+        }`,
+        'css-cup-redirect-banner', true
+      )
+      const URL_LOGIN = "https://intranet.usat.edu.pe/campusestudiante/Alumno.aspx"
+      const wrapper = document.querySelector("#wrapper")
+      if (wrapper) {
+        const banner = document.createElement("div")
+        let seconds = 5
+        banner.className = "custom-redirect-banner-container"
+        banner.innerHTML = `
+          <div class="custom-redirect-banner-inner">
+            <p class="custom-redirect-banner-text">
+              Serás redirigido al campus virtual en <span id="custom-redirect-countdown">${seconds}</span> segundos...
+            </p>
+            <button class="custom-redirect-btn custom-redirect-banner-close" aria-label="Cancelar">Cancelar redirección</button>
+            <button class="custom-redirect-btn custom-redirect-now" aria-label="Ir ahora">Ir ahora</button>
+          </div>
+        `
+        wrapper.insertBefore(banner, wrapper.firstChild)
+        const countdownEl = banner.querySelector("#custom-redirect-countdown")
+        const interval = setInterval(() => {
+          seconds--
+          if (seconds <= 0) {
+            clearInterval(interval)
+            window.location.href = URL_LOGIN
+          } else {
+            countdownEl.textContent = seconds
+          }
+        }, 1000)
+        const closeBtn = banner.querySelector(".custom-redirect-banner-close")
+        closeBtn.addEventListener("click", () => {
+          clearInterval(interval)
+          banner.remove()
+        })
+        const nowBtn = banner.querySelector(".custom-redirect-now")
+        nowBtn.addEventListener("click", () => {
+          clearInterval(interval)
+          window.location.href = URL_LOGIN
+        })
+      }
+    })
     // oldfn_14
     if (loc.pathname.startsWith('/campusestudiante')) {
       // ---- ---- SITE ERROR
