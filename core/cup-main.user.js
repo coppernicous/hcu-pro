@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.58
-// @description 2025-08-03 23:30
+// @version     18.62
+// @description 2025-08-08 23:02
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.58
-    let CUPvT = '@25-08-03 23:30'
+    let CUPvS = 18.62
+    let CUPvT = '@25-08-08 23:02'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -2903,14 +2903,18 @@ font-style:italic;display:none}`
                     let listHrs = ''
                     c['sch'].forEach(function(d, od) {
                       if (d) {
-                        let nd = dWn.split(',')[od]
-                        listHrs += /*html*/`
-                        <div class="c-i-h">
-                          <span class="c-i-h-d">${nd}</span>
-                          <span class="c-i-h-t" data-sht-range="${d['t']}">${HH2hh(d['t'])}</span>
-                          <span class="c-i-h-p">${strCapP(d['p'])}</span>
-                        </div>
-                        `
+                        d.forEach(function(bloqC) {
+                          bloqC['t_intervals'].forEach(function(redG) {
+                            let nd = dWn.split(',')[od]
+                            listHrs += /*html*/`
+                            <div class="c-i-h">
+                              <span class="c-i-h-d">${nd}</span>
+                              <span class="c-i-h-t" data-sht-range="${redG}">${HH2hh(redG)}</span>
+                              <span class="c-i-h-p">${strCapP(bloqC['p'])}</span>
+                            </div>
+                            `
+                          })
+                        })
                       }
                     })
                     let card = $n('div', attrs, /*html*/`html:
@@ -3191,9 +3195,13 @@ filas para una mejor vista</p>'
                 let regHrs = {a: [], z: []}
                 schData.w.forEach(function(d) {
                   d.forEach(function(h) {
-                    let hh = h['time'].split('-')
-                    regHrs.a.push(Number(hh[0]))
-                    regHrs.z.push(Number(hh[1]))
+                    let hh = h['time'].split('-').map(Number)
+                    if (!isNaN(hh[0]) && isFinite(hh[0]) && !regHrs.a.includes(hh[0])) {
+                      regHrs.a.push(hh[0])
+                    }
+                    if (!isNaN(hh[1]) && isFinite(hh[1]) && !regHrs.z.includes(hh[1])) {
+                      regHrs.z.push(hh[1])
+                    }
                   })
                 })
                 regHrs.min = Math.min(...regHrs.a)
@@ -3547,6 +3555,34 @@ filas para una mejor vista</p>'
                     updateEvents()
                   }, 60e3 * 60)
                 }, sec2nextHour * 1e3 + 2e3)
+              }              
+              function setTrueHours(arr, hrs) {
+                let [a, z] = hrs.split('-').map(Number)
+                for (let i = a; i < z && i < arr.length; i++) {
+                  arr[i] = true
+                }
+              }
+              function h2s(n) {
+                return String(n).padStart(2, 0)
+              }
+              function buildRangesFromHoursList(hoursList) {
+                let fd = new Array(24).fill(false)
+                hoursList.forEach(function(ha) {
+                  setTrueHours(fd, ha)
+                })
+                let ranges = []
+                let i = 0
+                while (i < fd.length) {
+                  if (fd[i]) {
+                    let start = i
+                    while (i < fd.length && fd[i]) i++
+                    let end = i
+                    ranges.push([h2s(start), h2s(end)].join('-'))
+                  } else {
+                    i++
+                  }
+                }
+                return ranges
               }
               function trCourses2Data() {
                 let dataCrs = {c: [], w: []}
@@ -3586,8 +3622,8 @@ filas para una mejor vista</p>'
                           if (fc2r) {
                             fc2r.remove()
                           }
-                          _schedule = []
                           let backRespData = JSON.parse(c.lastElementChild.innerHTML)
+                          let _schedule = []
                           backRespData.forEach(function(i) {
                             let dw = ('lu,ma,mi,ju,vi,sa,do').split(',')
                             let h = i['nombre_Hor'] + '-' + i['horaFin_Lho']
@@ -3595,27 +3631,22 @@ filas para una mejor vista</p>'
                             let p = i['ambiente']
                             p = p.toLowerCase().includes('e por conf') ? 'Por confirmar' : p
                             let di = dw.indexOf(i['dia_Lho'].toLowerCase())
-                            let cH = _schedule[di] ? _schedule[di]['h'] : []
-                            cH.push(h)
-                            _schedule[di] = {"p": p, "h": cH}
-                          })
-                          function setTrueHours(arr, hrs) {
-                            let [a, z] = hrs.split('-').map(Number)
-                            for (let i = a; i < z && i < arr.length; i++) {
-                              arr[i] = true
+                            _schedule[di] = _schedule[di] || []
+                            const courseId = (backRespData && backRespData[0]) ? backRespData[0]['codigo_cup'] : null
+                            let seg = _schedule[di].find(s => s.p === p && s.idCrsP === courseId)
+                            if (seg) {
+                              if (!seg.h.includes(h)) seg.h.push(h)
+                            } else {
+                              _schedule[di].push({ p: p, idCrsP: courseId, h: [h] })
                             }
-                          }
-                          function h2s(n) {
-                            return String(n).padStart(2, 0)
-                          }
-                          _schedule.forEach(function(d) {
-                            let fd = new Array(24).fill(false)
-                            d['h'].forEach(function(ha) {
-                              setTrueHours(fd, ha)
+                          })
+                          _schedule.forEach(function(daySegs, di) {
+                            if (!daySegs) return
+                            daySegs.forEach(function(seg) {
+                              let ranges = buildRangesFromHoursList(seg.h)
+                              seg.t_intervals = ranges
+                              seg.t = ranges.join(',') || null
                             })
-                            let hA = fd.indexOf(true)
-                            let hZ = fd.slice(hA).indexOf(false)
-                            d['t'] = ([h2s(hA), h2s(hA + hZ)]).join('-')
                           })
                           dataCrs.c.push({
                             name: backRespData[0]['nombre_Cur'],
@@ -3626,14 +3657,19 @@ filas para una mejor vista</p>'
                           })
                         })
                         dataCrs.c.forEach(function(c) {
-                          c.sch.forEach(function(s, di) {
+                          c.sch.forEach(function(daySegs, di) {
+                            if (!daySegs) return
                             dataCrs.w[di] = dataCrs.w[di] || []
-                            dataCrs.w[di].push({
-                              time: s['t'],
-                              amb: s['p'],
-                              idCrsP: c.idCrsP,
-                              name: c.name,
-                              prof: c.prof
+                            daySegs.forEach(function(seg) {
+                              seg.t_intervals.forEach(function(interval) {
+                                dataCrs.w[di].push({
+                                  time: interval,
+                                  amb: seg.p,
+                                  idCrsP: c.idCrsP,
+                                  name: c.name,
+                                  prof: c.prof
+                                })
+                              })
                             })
                           })
                         })
