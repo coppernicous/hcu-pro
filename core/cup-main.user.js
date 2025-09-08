@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.62
-// @description 2025-08-08 23:02
+// @version     18.64
+// @description 2025-09-08 10:56
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.62
-    let CUPvT = '@25-08-08 23:02'
+    let CUPvS = 18.64
+    let CUPvT = '@25-09-08 10:56'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -2006,7 +2006,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['mt:nadores Encuesta Plan Maestro', '.row', 'Ganadores de encuesta'],
           ['#divModal150', '.row', 'Clases presenciales'],
           ['#divModal151', '.row', 'Ascensores'],
-          ['#mdlActualizarClave', '.row', 'Actualización de clave']
+          // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
           if (item) {
@@ -3084,6 +3084,17 @@ filas para una mejor vista</p>'
                       let b = bc.qsf('#bfs-d')
                       b.addEventListener('click', function() {
                         if (!scm('aa')) {
+                          if (1 == 0) {
+                            htmlToImage.toPng(document.querySelector('.float-sch .cont-s-t'), { quality: 1, pixelRatio: 1 })
+                            .then(dataUrl => {
+                                let link = document.createElement("a")
+                                link.href = dataUrl
+                                link.download = nCiclo + '.png'
+                                link.click()
+                            })
+                            .catch(err => console.error("Error al capturar:", err))
+                            return
+                          }
                           html2canvas(document.querySelector('.float-sch .cont-s-t'), {
                             onrendered: function (canvas) {
                               let isrc = canvas.toDataURL('image/png')
@@ -3110,6 +3121,19 @@ filas para una mejor vista</p>'
                     mmodal()
                     baSH('prev_sch')
                   }
+                  if (1 == 0) {
+                    if (typeof html2canvas == 'function') {
+                      modSch()
+                    } else {
+                      let s = document.createElement('script')
+                      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js'
+                      document.head.appendChild(s)
+                      s.addEventListener('load', function() {
+                        modSch()
+                      })
+                    }
+                  }
+                  return
                   if (typeof html2canvas == 'function') {
                     modSch()
                   } else {
