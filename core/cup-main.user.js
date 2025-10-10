@@ -2006,6 +2006,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['mt:nadores Encuesta Plan Maestro', '.row', 'Ganadores de encuesta'],
           ['#divModal150', '.row', 'Clases presenciales'],
           ['#divModal151', '.row', 'Ascensores'],
+          ['#divModal183', '.row', 'Semana NARANJA'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
