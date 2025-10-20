@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.66
-// @description 2025-10-10 01:02
+// @version     18.68
+// @description 2025-10-19 22:46
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.66
-    let CUPvT = '@25-10-10 01:02'
+    let CUPvS = 18.68
+    let CUPvT = '@25-10-19 22:46'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -3673,13 +3673,15 @@ filas para una mejor vista</p>'
                               seg.t = ranges.join(',') || null
                             })
                           })
-                          dataCrs.c.push({
-                            name: backRespData[0]['nombre_Cur'],
-                            idCrsP: backRespData[0]['codigo_cup'],
-                            group: backRespData[0]['grupohor_cup'],
-                            prof: backRespData[0]['docente'],
-                            sch: _schedule
-                          })
+                          if (backRespData.length > 0) {
+                            dataCrs.c.push({
+                              name: backRespData[0]['nombre_Cur'],
+                              idCrsP: backRespData[0]['codigo_cup'],
+                              group: backRespData[0]['grupohor_cup'],
+                              prof: backRespData[0]['docente'],
+                              sch: _schedule
+                            })
+                          }
                         })
                         dataCrs.c.forEach(function(c) {
                           c.sch.forEach(function(daySegs, di) {
