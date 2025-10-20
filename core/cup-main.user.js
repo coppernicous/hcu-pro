@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.68
-// @description 2025-10-19 22:46
+// @version     18.72
+// @description 2025-10-20 11:20
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.68
-    let CUPvT = '@25-10-19 22:46'
+    let CUPvS = 18.72
+    let CUPvT = '@25-10-20 11:20'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -537,7 +537,7 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
       let jsmf = JSON.stringify({"background_color":"#fcc0c4",
         "description":"Campus Virtual USAT, con mejoras",
         "dir":"ltr","display":"standalone","name":"Campus USAT PRO",
-        "scope":"/","short_name":"Campus USAT PRO","start_url":lh+"/campusestudiante/Default.aspx",
+        "scope":lh,"short_name":"Campus USAT PRO","start_url":lh+"campusestudiante/Alumno.aspx",
         "theme_color":"#e0202e","categories":[],"screenshots":[],
         "icons":[
           {"src":bui+"6sP8Zkp.png&h=32","sizes":"32x32","type":"image/png","purpose":"any"},
@@ -558,13 +558,13 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
           {"src":bui+"njH5hwU.png&h=512","sizes":"512x512","type":"image/png","purpose":"maskable"}
         ],"shortcuts":[
           {"name":"Campus Virtual","description":"Información genera del estudiante",
-          "id":lh+"/campusestudiante/Default.aspx",
-          "url":lh+"/campusestudiante/Default.aspx","icons":[
+          "id":lh+"campusestudiante/Main.aspx",
+          "url":lh+"campusestudiante/Main.aspx","icons":[
           {"src":bui+"6sP8Zkp.png&h=64","sizes":"64x64","type":"image/png"},
           {"src":bui+"6sP8Zkp.png&h=192","sizes":"192x192","type":"image/png"},
           {"src":bui+"6sP8Zkp.png&h=256","sizes":"256x256","type":"image/png"}
           ]},{"name":"Aula Virtual","description":"Panel de todos tus cursos",
-          "url":lh+"/aulavirtual/my/","icons":[
+          "url":lh+"aulavirtual/my/","icons":[
           {"src":bui+"YdTfVhs.png&h=64","sizes":"64x64","type":"image/png"},
           {"src":bui+"YdTfVhs.png&h=192","sizes":"192x192","type":"image/png"},
           {"src":bui+"YdTfVhs.png&h=256","sizes":"256x256","type":"image/png"}
