@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.74
-// @description 2025-10-24 21:50
+// @version     18.76
+// @description 2025-10-24 22:52
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -15,14 +15,14 @@
 (function() {
   let loc = location
   let cSite = {d: 'usat.edu.pe'}
-  cSite.c = function(strP, strS = '', prt = '') {
+  cSite.c = function(strP, strS = '', prt = 's') {
     let prot = 'http'
     prot = prt == 's' ? prot + 's:' : prt == 'p' ? prot + ':' : prot = ''
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.74
-    let CUPvT = '@25-10-24 21:50'
+    let CUPvS = 18.76
+    let CUPvT = '@25-10-24 22:52'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
