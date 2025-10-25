@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.72
-// @description 2025-10-20 11:20
+// @version     18.74
+// @description 2025-10-24 21:50
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.72
-    let CUPvT = '@25-10-20 11:20'
+    let CUPvS = 18.74
+    let CUPvT = '@25-10-24 21:50'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -1158,7 +1158,7 @@ height:37px;margin-block-end:6px}.panel-default,.panel.panel-body{border:none}.t
         let simSbmt = function(u, p) {
           iptU.value = u
           iptP.value = p
-          fetch(lSitesU['defaspx'], {
+          fetch(lSitesU['main'], {
             method: 'GET',
           })
           .then(response => {
