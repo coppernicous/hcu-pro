@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.76
-// @description 2025-10-24 22:52
+// @version     18.78
+// @description 2025-10-26 11:24
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.76
-    let CUPvT = '@25-10-24 22:52'
+    let CUPvS = 18.78
+    let CUPvT = '@25-10-26 11:24'
     let CUPvSce = 17.04
     let CUPvSaa = 18.32
     let supVm = ''
@@ -462,6 +462,27 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
           zoomButtonContainer.remove()
         })
       })
+    }
+    const originalFetch = window.fetch.bind(window)
+    function fetch(...args) {
+      const [url, options] = args;
+      const requestIdentifier = `[FETCH] ${options?.method || 'GET'} ${url}`;
+      console.log(`${requestIdentifier} (Iniciando...)`);
+      return originalFetch(...args)
+      .then(response => {
+          response.clone().text().then(body => {
+            console.log(`${requestIdentifier} (Respuesta OK ${response.status})`, {
+              status: response.status,
+              statusText: response.statusText,
+              bodyPreview: body.substring(0, 100) + '...'
+          });
+        });
+        return response;
+      })
+      .catch(error => {
+          console.error(`${requestIdentifier} (¡FALLÓ!)`, error);
+          throw error;
+      });
     }
     // ---- ---- ID SITE
     let lSitesU = {
