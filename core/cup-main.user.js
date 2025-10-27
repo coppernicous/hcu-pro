@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.84
-// @description 2025-10-26 22:06
+// @version     18.86
+// @description 2025-10-26 22:16
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.84
-    let CUPvT = '@25-10-26 22:06'
+    let CUPvS = 18.86
+    let CUPvT = '@25-10-26 22:16'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -966,11 +966,10 @@ color:#fff}.fr{display:flex;align-items:center}`
         return cna
       }
       if (top == self) {
-        let linkUP = '<a href=" ' + extHost + '@">Descargar</a>'
+        let directURLDL = 'https://github.com/coppernicous/hcu-pro/releases/download/android-19.02/cup-app.apk'
+        let linkUP = '<a href=" ' + directURLDL + '">Descargar</a>'
         setTimeout(function() {
           if (scm('aa')) {
-            linkUP = linkUP.replace('@', 'campus-usat-pro.apk')
-            linkUP = 'https://github.com/coppernicous/hcu-pro/releases/download/android-19.02/cup-app.apk'
             if (window.__CUPmV != CUPvSaa) {
               clog(window.__CUPmV)
               clog(CUPvSaa)
