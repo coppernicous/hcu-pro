@@ -21,10 +21,10 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.78
+    let CUPvS = 18.82
     let CUPvT = '@25-10-26 11:24'
     let CUPvSce = 17.04
-    let CUPvSaa = 18.32
+    let CUPvSaa = 19.02
     let supVm = ''
     try {
       supVm = top.__CUPm
@@ -463,6 +463,7 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
         })
       })
     }
+    /*
     const originalFetch = window.fetch.bind(window)
     function fetch(...args) {
       const [url, options] = args;
@@ -484,6 +485,7 @@ line-heigh:1.2;border:none;padding:10px 20px;cursor:pointer;border-radius:5px}`,
           throw error;
       });
     }
+    */
     // ---- ---- ID SITE
     let lSitesU = {
       'main': cSite.c('intranet', 'campusestudiante/Main.aspx'),
