@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.88
-// @description 2025-10-31 21:50
+// @version     18.92
+// @description 2025-11-04 14:24
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.88
-    let CUPvT = '@25-10-31 21:50'
+    let CUPvS = 18.92
+    let CUPvT = '@25-11-04 14:24'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2018,7 +2018,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divInstrumentoEvaluacion', '.row', 'Encuesta de satisfacción estudiantil'],
           // /campusestudiante/InstrumentosEvaluacion/VerInstrumentoEvaluacion.aspx
           ['#divModal34', '.row', 'UNKNOW'],
-          ['#divAlumnoAvisoCarne', '.row', 'Modal aviso carnet'],
+          ['#divAlumnoAvisoCarne', '.row', 'Aviso carnet'],
           ['#divModal165', '.row', 'Encuesta sobre hostigamiento'],
           ['#divAlumnoTermino', '.row', 'Aceptar términos y condiciones de uso de imagen'],
           ['#modalDatos', '.row', 'Actualiza tus datos'],
@@ -2030,6 +2030,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal150', '.row', 'Clases presenciales'],
           ['#divModal151', '.row', 'Ascensores'],
           ['#divModal183', '.row', 'Semana NARANJA'],
+          ['#divModal186', '.row', 'Aviso de encuenta'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
