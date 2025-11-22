@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.96
-// @description 2025-11-20 18:04
+// @version     18.98
+// @description 2025-11-22 07:28
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.96
-    let CUPvT = '@25-11-20 18:04'
+    let CUPvS = 18.98
+    let CUPvT = '@25-11-22 07:28'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2034,6 +2034,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal188 ', '.row', 'Evento TedxUSAT invitación'],
           ['#divModal189', '.row', 'Evento TedxUSAT'],
           ['#divModal190', '.row', 'Encuesta Oducal'],
+          ['#divModal191', '.row', 'Finalización encuestas docente'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
