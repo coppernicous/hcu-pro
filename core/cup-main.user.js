@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     18.98
-// @description 2025-11-22 07:28
+// @version     19.02
+// @description 2025-12-08 16:56
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 18.98
-    let CUPvT = '@25-11-22 07:28'
+    let CUPvS = 19.02
+    let CUPvT = '@25-12-08 16:56'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2411,7 +2411,7 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           }
           // ---- ---- ---- ---- SCHEDULE
           let codUni = $('#lblCodigoUniversitario')?.innerText || ''
-          let timesOut = ['240707-240816','241207-250307', '250707-250804']
+          let timesOut = ['240707-240816','241207-250307', '250707-250804', '251208-260108']
           timesOut = timesOut
             .map(function(i) {return i.split('-')})
             .map(function(a) {
@@ -2423,8 +2423,9 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
           let isTOut = timesOut.some(function([fa, fb]) { return nD > fa && nD < fb})
           function showBannersTOut() {
             let bOut = $n('div', 'class::b-tout', /*html*/`html:
-              <div class="bnn-fimg" img-view-q="4"><img src="//i.ibb.co/20VC2hX4/programacion-usat-25-2.jpg
-"></div>`,
+              <div class="bnn-fimg" img-view-q="4"><img src="https://i.ibb.co/vxmdzV3X/programacion-usat-26-0.jpg"></div>
+              <div class="bnn-fimg" img-view-q="4"><img src="https://i.ibb.co/tTBQc7v4/programacion-usat-26-1.jpg"></div>
+              `,
               custom_panel_body
             )
             bOut.appendChild(setStyle(/*css*/`

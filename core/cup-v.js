@@ -1,1 +1,1 @@
-window.__CUPvR = 18.98
+window.__CUPvR = 19.02
