@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.02
-// @description 2025-12-08 16:56
+// @version     19.04
+// @description 2026-03-10 18:38
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -22,7 +22,7 @@
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
     let CUPvS = 19.02
-    let CUPvT = '@25-12-08 16:56'
+    let CUPvT = '@26-03-10 18:38'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -33,6 +33,7 @@
 
     }
     window.__CUPm = window.__CUPm || supVm || 'dv'
+    // window.__CUPm = 'aa' //REMOVE
     let um = window.__CUPm, hlog = []
     let scm = function(v) { return v.split(',').includes(um) }
     if (window.__readyCUP != undefined) {
@@ -120,7 +121,7 @@
       let dm = dt.getMonth()
       curCic = dt.getFullYear() + '-' + (dm > 6 ? 'II' : dm < 2 ? '0' : 'I')
     }
-    // ---- ---- GLOBAL FUNCTIONS
+    // ---- GLOBAL FUNCTIONS
     HTMLElement.prototype.qsf = function(query) { return this.querySelector(query)}
     HTMLElement.prototype.qsa = function(query) { return this.querySelectorAll(query)}
     HTMLElement.prototype.on = function(nameEvents, fn) {
@@ -1781,7 +1782,7 @@ Sigue el <a href="https://whatsapp.com/channel/0029VaaqtvuKLaHfqGedEK40" target=
           localStorage[kLLU] = CUPvT
         }
       }, (new Date().getDate() % 2 == 0 || localStorage['cup-dv-updreq']) && top == self && scm('dv'))
-      // ---- ---- LOAD AUTO LOGIN TO MOODLE AND NEW LOADER AND REMOVE MODALOPEN
+      // ---- ---- LOAD AUTO LOGIN TO MOODLE AND NEW LOADER AND REMOVE MODAL OPEN
       if (locSite == 'ls_campusMain') {
         // ---- ---- ---- AUTO LOGIN TO MOODLE
         let waitCredentials = requireLoginAV()
@@ -2035,6 +2036,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal189', '.row', 'Evento TedxUSAT'],
           ['#divModal190', '.row', 'Encuesta Oducal'],
           ['#divModal191', '.row', 'Finalización encuestas docente'],
+          ['#divModal197', '.row', 'Yapea tu pensión'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
@@ -2151,7 +2153,19 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           a.setAttribute('id', 'homeReset')
         }, 50)
         // ---- ---- ---- CUSTOM LINKS PANEL AND SCHEDULE
-        if (1 == 1) {
+        const ImgBBHandler = {
+          apiKey: 'b0de3a8280c9473e76332810e12b4bed',
+          upload: async function(blob) {
+            const formData = new FormData()
+            formData.append('image', blob, 'horario.png')
+            const response = await fetch(`https://api.imgbb.com/1/upload?expiration=120&key=${this.apiKey}`, {
+              method: 'POST',
+              body: formData
+            })
+            return await response.json()
+          }
+        }
+        function initCustomPanels() {
           let boardHomeNative = $('.main-content #divContent > .col-md-12')
           let pp = boardHomeNative.qsf('.col-md-8')
           let custom_panel = $n('div', 'class::panel panel-piluku custom-panel')
@@ -3112,30 +3126,57 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
 filas para una mejor vista</p>'
                       }
                       let b = bc.qsf('#bfs-d')
-                      b.addEventListener('click', function() {
-                        if (!scm('aa')) {
-                          if (1 == 0) {
-                            htmlToImage.toPng(document.querySelector('.float-sch .cont-s-t'), { quality: 1, pixelRatio: 1 })
-                            .then(dataUrl => {
-                                let link = document.createElement("a")
-                                link.href = dataUrl
-                                link.download = nCiclo + '.png'
-                                link.click()
+                      b.addEventListener('click', async function() {
+                        const target = document.querySelector('.float-sch .cont-s-t')
+                        let dataUrl = null
+
+                        try {
+                          if (typeof htmlToImage !== 'undefined') {
+                            dataUrl = await htmlToImage.toPng(target, { quality: 1, pixelRatio: 1 })
+                          } else if (typeof html2canvas !== 'undefined') {
+                            const result = html2canvas(target, {
+                              onrendered: async (canvas) => {
+                                await processDownload(canvas.toDataURL('image/png'))
+                              }
                             })
-                            .catch(err => console.error("Error al capturar:", err))
-                            return
+                            if (result instanceof Promise) {
+                              const canvas = await result
+                              dataUrl = canvas.toDataURL('image/png')
+                            } else { return }
                           }
-                          html2canvas(document.querySelector('.float-sch .cont-s-t'), {
-                            onrendered: function (canvas) {
-                              let isrc = canvas.toDataURL('image/png')
-                              let nb = $n('a', 'download::' + nCiclo + '.png', nCiclo + '.png', 'ddbb')
-                              nb.href = isrc
-                              nb.click()
-                              nb.remove()
+
+                          if (dataUrl) await processDownload(dataUrl)
+                          else if (!window.htmlToImage && !window.html2canvas) throw new Error()
+
+                        } catch (err) {
+                          toastMSG('No se pudo procesar la descarga', '-', 4e3)
+                        }
+
+                        async function processDownload(url) {
+                          if (!scm('aa')) {
+                            const link = document.createElement("a")
+                            link.href = url
+                            link.download = nCiclo + '.png'
+                            document.body.appendChild(link)
+                            console.log(link)
+                            link.click()
+                            document.body.removeChild(link)
+                          } else {
+                            toastMSG('Cargando imagen...', '-', 2e3)
+                            const resBlob = await fetch(url).then(r => r.blob())
+                            const res = await ImgBBHandler.upload(resBlob)
+                            if (res.success) {
+                              const remoteLink = document.createElement("a")
+                              remoteLink.href = res.data.url
+                              remoteLink.download = nCiclo + '.png'
+                              document.body.appendChild(remoteLink)
+                              console.log(remoteLink)
+                              remoteLink.click()
+                              document.body.removeChild(remoteLink)
+                            } else {
+                              toastMSG('Error al procesar la imagen externa', '-', 4e3)
                             }
-                          })
-                        } else {
-                          toastMSG('Esta opción solo es compatible desde el navegador', '-', 4e3)
+                          }
                         }
                       })
                       if (toDL) {
@@ -3151,29 +3192,7 @@ filas para una mejor vista</p>'
                     mmodal()
                     baSH('prev_sch')
                   }
-                  if (1 == 0) {
-                    if (typeof html2canvas == 'function') {
-                      modSch()
-                    } else {
-                      let s = document.createElement('script')
-                      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js'
-                      document.head.appendChild(s)
-                      s.addEventListener('load', function() {
-                        modSch()
-                      })
-                    }
-                    return
-                  }
-                  if (typeof html2canvas == 'function') {
-                    modSch()
-                  } else {
-                    let s = document.createElement('script')
-                    s.src = '/campusestudiante/RetornoSeguro/html2canvas.js'
-                    document.head.appendChild(s)
-                    s.addEventListener('load', function() {
-                      modSch()
-                    })
-                  }
+                  modSch()
                 }
                 $('#p-sch-f').addEventListener('click', function() {
                   view_sch()
@@ -3846,6 +3865,54 @@ Si esta app te resulta útil, no olvides recomendarla a tus contactos.', ctm_pmo
             })
           }
         }
+        // ---- ---- ---- ---- LOAD JS LIBRERIES
+        async function loadImgLibs() {
+          const scripts = [
+            { 
+              id: 'js-html-to-image', 
+              src: 'https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js',
+              global: 'htmlToImage'
+            },
+            { 
+              id: 'js-html2canvas', 
+              src: '/campusestudiante/RetornoSeguro/html2canvas.js',
+              global: 'html2canvas'
+            }
+          ]
+
+          const loadScript = (lib) => {
+            return new Promise((resolve, reject) => {
+              if (window[lib.global] || document.getElementById(lib.id)) {
+                return resolve()
+              }
+
+              const script = document.createElement('script')
+              script.id = lib.id
+              script.src = lib.src
+              script.async = true
+
+              script.onload = () => {
+                resolve()
+              }
+
+              script.onerror = () => {
+                reject(new Error(`Error al cargar el script: ${lib.src}`))
+              }
+
+              document.head.appendChild(script)
+            })
+          }
+
+          try {
+            await Promise.all(scripts.map(loadScript))
+          } catch (error) {
+            clog('Failed load scripts:', error)
+          }
+        }
+
+        loadImgLibs().then(() => {
+          initCustomPanels()
+        });
         // ---- ---- ---- OPEN MOODLE WINDOW
         if (top == self && !window.__requireLAV) {
           let d = $('.moodle-frame')
