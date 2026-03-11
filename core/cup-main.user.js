@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.08
-// @description 2026-03-10 3:084
+// @version     19.12
+// @description 2026-03-10 23:22
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.08
-    let CUPvT = '@26-03-10 23:08'
+    let CUPvS = 19.12
+    let CUPvT = '@26-03-10 23:22'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -3030,8 +3030,9 @@ max-height:100%;overflow:auto}.float-sch .sch-f::-webkit-scrollbar{height:8px;wi
 .float-sch .cont-s-t-h{right:0 !important;overflow:visible}.float-sch .cont-s-t-i{bottom:0 !important;
 padding-inline:5px 5px !important}.float-sch .cont-s-t-i-c{transform:none !important}.float-sch p
 .sch-name-file{font-size:18px;font-weight:700;width:100%;text-align:center;margin-block-start:16px;
-margin-block-end:16px;color:white}.cont-sch-pr .h{display:flex;padding:4px;align-items:center}
-.cont-sch-pr .h .mo{flex:1}.float-sch .mo,.float-sch .mr{display:flex;gap:6px}.float-sch .h a{width:40px;
+margin-block-end:16px;color:white}.cont-sch-pr .h{display:flex;padding:4px;align-items:center;gap:8px}
+.cont-sch-pr .h .mo{flex:1;overflow:auto}.cont-sch-pr .h .mo a{flex-shrink:0;}.float-sch .mo,
+.float-sch .mr{display:flex;gap:6px}.float-sch .h a{width:40px;
 height:40px;font-size:20px;border-style:solid;border-width:1px;border-color:#ffffff65;display:flex;
 align-items:center;justify-content:center;color:#ffffffb2;transition:all 0.3s;cursor:pointer}
 .float-sch .h a:hover{background-color:#ffffff25;color:#fff;border-color:#fff}@keyframes pulse{0%{
@@ -3044,7 +3045,7 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
 .in.prev-img .sch-f{display:none}.in:not(.prev-img) .sch-as-imagen{display:none}.sch-as-imagen{
 width:100%;background:white;border-radius:6px;padding:18px;display:flex;gap:18px;flex-direction:column;
 max-width:1200px;max-height:800px}.sch-as-imagen .sch-a-i-p img{height:min-content;width:min-content;
-border:1px dashed #a3a3a3}.sch-a-i-p{display:flex;justify-content:center;max-width:100%;overflow:auto;}
+border:1px dashed #a3a3a3}.sch-a-i-p{display:flex;justify-content:start;max-width:100%;overflow:auto;}
 .sch-a-i-bc{display:inline-flex;gap:8px;background:#dedede;border-radius:18px;padding:4px 12px;
 cursor:pointer}.sch-as-imagen em{border-left:solid 4px gray;padding-left:8px;font-size:16px}`
                     bcStyle = bcStyle.replaceAll('\n', '')
@@ -3168,7 +3169,13 @@ width:var(--sch-vf-sw)}.float-sch .sc-row-guide:not(.last){height:var(--sch-vf-s
 filas para una mejor vista</p>'
                       }
                       let b = bc.qsf('#bfs-d')
+                      let activeAttemp = false
                       b.addEventListener('click', async function() {
+                        if (activeAttemp) return
+                        activeAttemp = true
+                        if (scm('aa')) {
+                          toastMSG('Preparando imagen, espere...', '-', 2e3)
+                        }
                         const target = document.querySelector('.float-sch .cont-s-t')
                         let dataUrl = null
 
@@ -3187,11 +3194,12 @@ filas para una mejor vista</p>'
                             } else { return }
                           }
 
+                          activeAttemp = false
                           if (dataUrl) await processDownload(dataUrl)
                           else if (!window.htmlToImage && !window.html2canvas) throw new Error()
-
                         } catch (err) {
                           toastMSG('No se pudo procesar la descarga', '-', 4e3)
+                          activeAttemp = false
                         }
 
                         async function processDownload(url) {
