@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.06
-// @description 2026-03-10 22:54
+// @version     19.08
+// @description 2026-03-10 3:084
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.06
-    let CUPvT = '@26-03-10 22:54'
+    let CUPvS = 19.08
+    let CUPvT = '@26-03-10 23:08'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -33,7 +33,7 @@
 
     }
     window.__CUPm = window.__CUPm || supVm || 'dv'
-    window.__CUPm = 'aa' //REMOVE
+    // window.__CUPm = 'aa' //REMOVE
     let um = window.__CUPm, hlog = []
     let scm = function(v) { return v.split(',').includes(um) }
     if (window.__readyCUP != undefined) {
@@ -3042,11 +3042,11 @@ animation-iteration-count:infinite;border-color:#ffffff}.float-sch .sc-row-guide
 var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:14px}
 .float-sch .lac{display:none;}
 .in.prev-img .sch-f{display:none}.in:not(.prev-img) .sch-as-imagen{display:none}.sch-as-imagen{
-background:white;border-radius:6px;padding:18px;display:flex;gap:18px;flex-direction:column;
+width:100%;background:white;border-radius:6px;padding:18px;display:flex;gap:18px;flex-direction:column;
 max-width:1200px;max-height:800px}.sch-as-imagen .sch-a-i-p img{height:min-content;width:min-content;
-border:1px dashed #a3a3a3}.sch-a-i-p{display:flex;justify-content:center}.sch-a-i-bc{
-display:inline-flex;gap:8px;background:#dedede;border-radius:18px;padding:4px 12px;cursor:pointer
-}.sch-as-imagen em{border-left:solid 4px gray;padding-left:8px;font-size:16px}`
+border:1px dashed #a3a3a3}.sch-a-i-p{display:flex;justify-content:center;max-width:100%;overflow:auto;}
+.sch-a-i-bc{display:inline-flex;gap:8px;background:#dedede;border-radius:18px;padding:4px 12px;
+cursor:pointer}.sch-as-imagen em{border-left:solid 4px gray;padding-left:8px;font-size:16px}`
                     bcStyle = bcStyle.replaceAll('\n', '')
                     let bc = $n('div', 'class::float-sch', /*html*/`html:
 <div class="cont-sch-pr">
@@ -3292,13 +3292,7 @@ filas para una mejor vista</p>'
                   $('#p-sch-i').on('click', function() {
                     printSch(true)
                   })
-                  $('#p-sch-d').on('click', function() {
-                    view_sch(true)
-                  })
                 } else {
-                  $('#p-sch-d').on('click', function() {
-                    toastMSG('Esta opción solo es compatible desde el navegador', '-', 4e3)
-                  })
                   $('#p-sch-t').on('click', function() {
                     toastMSG('Esta opción solo es compatible desde el navegador', '-', 4e3)
                   })
@@ -3306,6 +3300,9 @@ filas para una mejor vista</p>'
                     toastMSG('Esta opción solo es compatible desde el navegador', '-', 4e3)
                   })
                 }
+                $('#p-sch-d').on('click', function() {
+                  view_sch(true)
+                })
                 let regHrs = {a: [], z: []}
                 schData.w.forEach(function(d) {
                   d.forEach(function(h) {
