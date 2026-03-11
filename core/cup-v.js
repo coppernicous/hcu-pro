@@ -1,1 +1,1 @@
-window.__CUPvR = 19.04
+window.__CUPvR = 19.06

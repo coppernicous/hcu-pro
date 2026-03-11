@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.04
-// @description 2026-03-10 18:38
+// @version     19.06
+// @description 2026-03-10 22:54
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.02
-    let CUPvT = '@26-03-10 18:38'
+    let CUPvS = 19.06
+    let CUPvT = '@26-03-10 22:54'
     let CUPvSce = 17.04
     let CUPvSaa = 19.02
     let supVm = ''
@@ -33,7 +33,7 @@
 
     }
     window.__CUPm = window.__CUPm || supVm || 'dv'
-    // window.__CUPm = 'aa' //REMOVE
+    window.__CUPm = 'aa' //REMOVE
     let um = window.__CUPm, hlog = []
     let scm = function(v) { return v.split(',').includes(um) }
     if (window.__readyCUP != undefined) {
@@ -2155,10 +2155,10 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
         // ---- ---- ---- CUSTOM LINKS PANEL AND SCHEDULE
         const ImgBBHandler = {
           apiKey: 'b0de3a8280c9473e76332810e12b4bed',
-          upload: async function(blob) {
+          upload: async function(blob, name = 'image.png') {
             const formData = new FormData()
-            formData.append('image', blob, 'horario.png')
-            const response = await fetch(`https://api.imgbb.com/1/upload?expiration=120&key=${this.apiKey}`, {
+            formData.append('image', blob, name)
+            const response = await fetch(`https://api.imgbb.com/1/upload?expiration=600&key=${this.apiKey}`, {
               method: 'POST',
               body: formData
             })
@@ -3040,7 +3040,13 @@ transform:scale3d(1.15, 1.15, 1.15);background-color:#ffffff25}100%,50%{-webkit-
 transform:scaleX(1)}}.float-sch .h a.pulse{animation-name:pulse;animation-duration:2s;
 animation-iteration-count:infinite;border-color:#ffffff}.float-sch .sc-row-guide:not(.last){height:
 var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:14px}
-.float-sch .lac{display:none;}`
+.float-sch .lac{display:none;}
+.in.prev-img .sch-f{display:none}.in:not(.prev-img) .sch-as-imagen{display:none}.sch-as-imagen{
+background:white;border-radius:6px;padding:18px;display:flex;gap:18px;flex-direction:column;
+max-width:1200px;max-height:800px}.sch-as-imagen .sch-a-i-p img{height:min-content;width:min-content;
+border:1px dashed #a3a3a3}.sch-a-i-p{display:flex;justify-content:center}.sch-a-i-bc{
+display:inline-flex;gap:8px;background:#dedede;border-radius:18px;padding:4px 12px;cursor:pointer
+}.sch-as-imagen em{border-left:solid 4px gray;padding-left:8px;font-size:16px}`
                     bcStyle = bcStyle.replaceAll('\n', '')
                     let bc = $n('div', 'class::float-sch', /*html*/`html:
 <div class="cont-sch-pr">
@@ -3050,13 +3056,27 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
       <a id="bfs-ih"><i class="ion-chevron-down"></i></a>
       <a id="bfs-dw"><i class="ion-chevron-left"></i></a>
       <a id="bfs-iw"><i class="ion-chevron-right"></i></a>
+      <a id="bfs-df"><i class="ion-minus"></i></a>
+      <a id="bfs-if"><i class="ion-plus"></i></a>
     </div>
     <div class="mr">
       <a id="bfs-d"><i class="ion-android-download"></i></a>
       <a id="bfs-c"><i class="ion-close-round"></i></a>
     </div>
   </div>
-  <div class="in"><div class="sch-f"></div></div>
+  <div class="in">
+    <div class="sch-f"></div>
+    <div class="sch-as-imagen">
+      <div>
+        <div class="sch-a-i-bc">
+          <i class="ion-chevron-left"></i>
+          <span>Volver</span>
+        </div>
+      </div>
+      <div class="sch-a-i-p"></div>
+      <div><em>Pulse sobre la imagen para poder descargarla</em></div>
+    </div>
+  </div>
   <div class="sub">
     <p class="sch-name-file">${nCiclo}</p>
   </div>
@@ -3068,16 +3088,36 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
 </div>`, 'ddbb')
                     bc.qsf('.sch-f').appendChild(c.cloneNode(true))
                     setTimeout(function() {
+                      bc.qsf('.sch-a-i-bc').addEventListener('click', function() {
+                        bc.qsf('.in').classList.remove('prev-img')
+                      })
                       let cpo = bc.qsf('.cont-s-t')
                       let varSH = $('.float-sch .col-h .sc-row-guide').clientHeight
+                      let varFH = $('.float-sch .cont-s-t').clientHeight
+                      let ratio = 2.5
+                      ratio = Math.round(ratio * 100) / 100
+                      let desiredColumnWidth = (varFH * ratio) / 7
+                      desiredColumnWidth = Math.round(desiredColumnWidth * 100) / 100
                       let varSW = $('.float-sch .d-i-n').clientWidth - 2
-                      function setValEditFromBtn(qsb, rootprop, defprop, incVal) {
-                        cpo.style.setProperty(rootprop, defprop + 'px')
+                      varSW = desiredColumnWidth > varSW ? varSW : desiredColumnWidth
+                      let varIZm = 1
+                      function setValEditFromBtn(qsb, rootprop, defprop, incVal, unit) {
+                        let valueProp = unit == 'N' ? Number(defprop) : defprop + unit
+                        cpo.style.setProperty(rootprop, valueProp)
                         let b = bc.qsf('.h #' + qsb)
                         let ivalEdit, currEdit =  false
                         function changeVal(v) {
-                          let lv = Number(cpo.style.getPropertyValue(rootprop).replace('px', ''))
-                          cpo.style.setProperty(rootprop, (lv + v) + 'px')
+                          let lv = 0
+                          if (unit == 'N') {
+                            lv = cpo.style.getPropertyValue(rootprop) || defprop
+                          } else {
+                            lv = cpo.style.getPropertyValue(rootprop).replace(unit, '')
+                          }
+                          lv = Number(lv)
+                          lv = Number.isInteger(lv) ? lv : Math.round(lv * 100) / 100
+                          lv += v
+                          let endValue = unit == 'N' ? lv : (lv + unit)
+                          cpo.style.setProperty(rootprop, endValue)
                         }
                         function propEdit(val) {
                           currEdit = true
@@ -3094,10 +3134,12 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
                         })
                         b.addEventListener('click', function() { changeVal(incVal) })
                       }
-                      setValEditFromBtn('bfs-dh', '--sch-vf-sh', 0, -1)
-                      setValEditFromBtn('bfs-ih', '--sch-vf-sh', varSH, 1)
-                      setValEditFromBtn('bfs-dw', '--sch-vf-sw', 0, -1)
-                      setValEditFromBtn('bfs-iw', '--sch-vf-sw', varSW, 1)
+                      setValEditFromBtn('bfs-dh', '--sch-vf-sh', 0, -1, 'px')
+                      setValEditFromBtn('bfs-ih', '--sch-vf-sh', varSH, 1, 'px')
+                      setValEditFromBtn('bfs-dw', '--sch-vf-sw', 0, -1, 'px')
+                      setValEditFromBtn('bfs-iw', '--sch-vf-sw', varSW, 1, 'px')
+                      setValEditFromBtn('bfs-if', '--sch-vf-zm', varIZm, 0.03, 'N')
+                      setValEditFromBtn('bfs-df', '--sch-vf-zm', varIZm, -0.03, 'N')
                       $$('.float-sch [data-sh-c-s]').forEach(function(c) {
                         let [a, b] = c.getAttribute('data-sh-c-s').split('-')
                         let h = b - a
@@ -3110,9 +3152,9 @@ var(--tsc-rh)}.float-sch .sub .inf-sch{color:white;text-align:center;font-size:1
                         bc.qsf('.cont-s-t-h')
                       }
                       bc.qsf('.cs').innerHTML = /*css*/`
-                      .float-sch .col-d,.float-sch .cont-s-t-h .d-i-n{flex:none;width:var(--sch-vf-sw)}
-                      .float-sch .sc-row-guide:not(.last){height:var(--sch-vf-sh)}
-                      .float-sch .sch-f .cont-s-t {width:fit-content}`
+                      .float-sch .col-d,.float-sch .cont-s-t-h .d-i-n{flex:none;
+width:var(--sch-vf-sw)}.float-sch .sc-row-guide:not(.last){height:var(--sch-vf-sh)}
+.float-sch .sch-f .cont-s-t {width:fit-content;background-color:white;zoom:var(--sch-vf-zm)}`
                       if (cpo.parentNode.scrollHeight > cpo.parentNode.clientHeight) {
                         let btn_sug = bc.qsf('#bfs-dh')
                         btn_sug.classList.add('pulse')
@@ -3158,21 +3200,20 @@ filas para una mejor vista</p>'
                             link.href = url
                             link.download = nCiclo + '.png'
                             document.body.appendChild(link)
-                            console.log(link)
                             link.click()
                             document.body.removeChild(link)
                           } else {
                             toastMSG('Cargando imagen...', '-', 2e3)
                             const resBlob = await fetch(url).then(r => r.blob())
-                            const res = await ImgBBHandler.upload(resBlob)
+                            let nFrmCiclo = nCiclo.replace(/\s+/g, '-') + '.png'
+                            const res = await ImgBBHandler.upload(resBlob, nFrmCiclo)
                             if (res.success) {
-                              const remoteLink = document.createElement("a")
-                              remoteLink.href = res.data.url
-                              remoteLink.download = nCiclo + '.png'
-                              document.body.appendChild(remoteLink)
-                              console.log(remoteLink)
-                              remoteLink.click()
-                              document.body.removeChild(remoteLink)
+                              bc.qsf('.in').classList.add('prev-img')
+                              const imgElement = document.createElement('img')
+                              imgElement.src = res.data.url
+                              let contIShP = bc.qsf('.sch-a-i-p')
+                              contIShP.innerHTML = ''
+                              contIShP.appendChild(imgElement)
                             } else {
                               toastMSG('Error al procesar la imagen externa', '-', 4e3)
                             }
