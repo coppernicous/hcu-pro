@@ -967,20 +967,22 @@ color:#fff}.fr{display:flex;align-items:center}`
         return cna
       }
       if (top == self) {
-        let directURLDL = 'https://github.com/coppernicous/hcu-pro/releases/download/android-19.02/cup-app.apk'
-        let linkUP = '<a href=" ' + directURLDL + '">Descargar</a>'
+        let directURLdlAndroid = 'https://github.com/coppernicous/hcu-pro/releases/download/android-19.02/cup-app.apk'
+        let directURLdlExtension = 'https://github.com/coppernicous/hcu-pro/releases/download/chrome-extension-18.20/chrome-extension-mv3.zip'
+        function wrapLinkUP(urlString) {
+          return `<a href="${urlString}">Descargar</a>`
+        }
         setTimeout(function() {
           if (scm('aa')) {
             if (window.__CUPmV != CUPvSaa) {
               clog(window.__CUPmV)
               clog(CUPvSaa)
-              toastMSG(`:Actualice la app a la versión ${CUPvSaa} ${linkUP}`, '-', 4e3)
+              toastMSG(`:Actualice la app a la versión ${CUPvSaa} ${wrapLinkUP(directURLdlAndroid)}`, '-', 4e3)
             }
           }
           if (scm('ce')) {
-            linkUP = linkUP.replace('@', 'campus-usat-pro.zip')
             if (window.__CUPmV != CUPvSce) {
-              toastMSG(`:Actualice la extensión USAT PRO a la versión ${CUPvSce} ${linkUP}`, '-', 4e3)
+              toastMSG(`:Actualice la extensión USAT PRO a la versión ${CUPvSce} ${wrapLinkUP(directURLdlExtension)}`, '-', 4e3)
             }
           }
         }, 3e3)
