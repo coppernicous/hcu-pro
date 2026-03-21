@@ -34,6 +34,6 @@
       "all_frames": true
     }
   ],
-  "homepage_url": "https://coppernicous.github.io/cup/site/",
+  "homepage_url": "https://coppernicous.github.io/hcu-pro/site/",
   "content_security_policy": "script-src 'self' https://coppernicous.github.io; object-src 'self'"
 }
