@@ -258,7 +258,7 @@
     }
     function strCapC(strCourse) {
       let strEC = strCourse.charAt(0).toUpperCase() + strCourse.slice(1).toLowerCase()
-      return strEC.replace(/ ii */, 'II').replace(/ i *$/, 'I')
+      return strEC.replace(/ ii */, ' II').replace(/ i *$/, ' I')
     }
     function strCapP(strP) {
       return strCapC(strP).replace(/\(.+\)/, function(tbp) {
@@ -2639,7 +2639,9 @@ border-block-start:0;font-weight:bold;background-color:#a3d5ff}
                   runOrwait(msgUI_show, 'No se pudo cargar la información', 'red', false, 3)
                 })
               }
-              function setSchedule(schData) {
+              window.setSchedule = function() {}
+              // function setSchedule(schData) {
+              setSchedule = function (schData) {
                 function HH2hh(hh) {
                   return hh.split('-').map(function(h) {
                     return h < 12 ? Number(h) + 'am' : h < 13 ? h + 'pm' : (h - 12) + 'pm'
@@ -3371,6 +3373,16 @@ filas para una mejor vista</p>'
                   tbl_b.style.marginBlockStart = sth + 'px'
                   tbl_i.parentNode.style.top = sth + 'px'
                 }
+                function alterCase(upper = true) {
+                  $('.b-sc').qsa('.itm-course .c-name input.ipt-rename')
+                    .forEach(function(i) {
+                      i.value = upper ? i.value.toUpperCase() : strCapC(i.value)
+                      i.style.width = (i.value.length + 3) + 'ch'
+                    })
+                  $$('.sc-d-cc .scdc-n').forEach(function(i) {
+                    i.innerText = upper ? i.innerText.toUpperCase() : strCapC(i.innerText)
+                  })
+                }
                 function setLeftSp() {
                   setRCss('sh-left-ih', (tbl_i.parentNode.offsetWidth - 1) + 'px')
                 }
@@ -3379,6 +3391,11 @@ filas para una mejor vista</p>'
                     $('.b-sc .cont-s-t').classList.toggle('h-shs')
                   }]
                 ], '', 'Mostrar sombras', true, function() {}))
+                contCtrls.appendChild(newCtrl('checkbox', 'sh-c-uuc', [
+                  ['change', function(e) {
+                    alterCase(e.checked)
+                  }]
+                ], '', 'Nombres en mayúsculas', false, function() {}))
                 contCtrls.appendChild(newCtrl('checkbox', 'sh-c-sih', [
                   ['change', function(e) {
                     $('.b-sc .cont-s-t').classList.toggle('h-hrs')
@@ -3510,7 +3527,7 @@ filas para una mejor vista</p>'
                             <div class="inspd" title="${c['name']}">
                               <input type="color">
                               <div class="scdc-t">${neHh(c['time'])}</div>
-                              <div class="scdc-n">${c['name']}</div>
+                              <div class="scdc-n">${strCapC(c['name'])}</div>
                             </div>
                             <div class="lac ${posLAC}">
                               <div class="lac-c"></div>
@@ -3676,7 +3693,7 @@ filas para una mejor vista</p>'
                     updateEvents()
                   }, 60e3 * 60)
                 }, sec2nextHour * 1e3 + 2e3)
-              }              
+              }
               function setTrueHours(arr, hrs) {
                 let [a, z] = hrs.split('-').map(Number)
                 for (let i = a; i < z && i < arr.length; i++) {
