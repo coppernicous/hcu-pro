@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.16
-// @description 2026-03-21 76024
+// @version     19.18
+// @description 2026-03-21 20020
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.16
-    let CUPvT = '@26-03-21 17:02'
+    let CUPvS = 19.18
+    let CUPvT = '@26-03-21 20:20'
     let CUPvSce = 18.20
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2639,9 +2639,7 @@ border-block-start:0;font-weight:bold;background-color:#a3d5ff}
                   runOrwait(msgUI_show, 'No se pudo cargar la información', 'red', false, 3)
                 })
               }
-              window.setSchedule = function() {}
-              // function setSchedule(schData) {
-              setSchedule = function (schData) {
+              function setSchedule(schData) {
                 function HH2hh(hh) {
                   return hh.split('-').map(function(h) {
                     return h < 12 ? Number(h) + 'am' : h < 13 ? h + 'pm' : (h - 12) + 'pm'
