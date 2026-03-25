@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.18
-// @description 2026-03-21 20020
+// @version     19.22
+// @description 2026-03-24 23:20
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.18
-    let CUPvT = '@26-03-21 20:20'
+    let CUPvS = 19.22
+    let CUPvT = '@26-03-24 23:20'
     let CUPvSce = 18.20
     let CUPvSaa = 19.02
     let supVm = ''
@@ -1089,12 +1089,18 @@ li.inf-acc{font-size:14px;padding:6px;background-color:#ffffff}li.inf-acc .c div
 text-align:center}li.inf-acc .btn2dacc{color:#000;font-weight:700}.inf-acc .c{border-style:solid;border-width:1px;
 border-color:#cecece}li.inf-acc:hover .c{border-color:#000}li.inf-acc:hover .c div{color:#000}
 li.inf-acc:hover .btn2dacc{background-color:#c8c8c8}.top-bar .open a span#lblCodigoUniversitario{color:black !important}
-.btn-close-modal-b{display:block !important}#mdlActualizarClave button.close span.ti-close{
-color:black !important}#mdlActualizarClave button.close{opacity:.6 !important}
-.panel-body .bguim-c .bmsgi{margin-block-end:6px}.bguim-c{margin-block-end:12px}.bmsgi{border-radius:6px;
-border-style:solid;border-width:1px;padding:6px 12px}.bmsgi.my{border-color:#694b08;color:#675110;
-background-color:#ffffe9}.bmsgi.mw{border-color:#bbbbbb;color:#585858;background-color:#f9f9f9}
-.bmsgi.mr{border-color:#690808;color:#671010;background-color:#ffe9e9}.bmsgi > i{margin-inline-end:8px}`],
+.btn-close-modal-b{display:block !important}#mdlActualizarClave button.close span.ti-close{color:black !important}
+#mdlActualizarClave button.close{opacity:.6 !important}.panel-body .bguim-c .bmsgi{margin-block-end:6px}
+.bguim-c{margin-block-end:12px}.bmsgi{border-radius:6px;border-style:solid;border-width:1px;padding:6px 12px;
+display:flex;justify-content:space-between;align-items:center}.bguim-c .bmsgi>*{display:flex;align-items:center;
+flex-wrap:wrap;gap:0px 4px;}.bmsgi.my{border-color:#694b08;color:#675110;background-color:#ffffe9}
+.bmsgi.mw{border-color:#bbbbbb;color:#585858;background-color:#f9f9f9}.bmsgi.mr{border-color:#690808;color:#671010;
+background-color:#ffe9e9}.bmsgi .msg-left>i{margin-inline-end:4px}.bmsgi a.bmsgb{cursor:pointer;padding:4px 10px;
+border-style:solid;border-width:1px;border-radius:6px;text-decoration:none;display:flex;transition:0.3s}
+.bmsgi.mr a.bmsgb{color:#ffffff;border-color:#ad3a3a;background:#cc5858}.bmsgi.mr a.bmsgb:hover{background-color:#b93333}
+.bmsgi.my a.bmsgb{color:#505238;border-color:#867e26;background:#f0edb1}.bmsgi.my a.bmsgb:hover{background-color:#e3d843}
+.bmsgi.mw a.bmsgb{color:#6c6c6c;border-color:#ada0a0;background:#f2f2f2}.bmsgi.mw a.bmsgb:hover{background-color:#d5d5d5}
+`],
         ['ls_calificaciones', /*css*/`.col-xs-12,.col-xs-12 > * > *,.container-fluid,.panel.panel-body{padding:0 !important}
 @media (max-width:599px){.form-group{display:flex;flex-direction:column;align-items:stretch;margin-bottom:0}
 .row .form-group{margin:0px}.form-group *{width:100% !important}}@media (min-width:600px){.form-group{display:flex;
@@ -2298,13 +2304,26 @@ background-color:#dcdcdc;color:#656565;border-color:#c7c7c7}`, 'css-cup-shorcuts
                 } else {
                   inBlockMsg = /*html*/ `<span>${t.tiempoRC}</span>`
                 }
+                let button2Change = null
+                if ($('#lnkTiempoRC')) {
+                  button2Change = $n('a', 'class::bmsgb', 'Actualizar ahora', msgTime2CKc)
+                  button2Change.addEventListener('click', function() {
+                    $('#lnkTiempoRC').click()
+                  })
+                }
                 let outBlockMsg = /*html*/`
                   <div class="bmsgi ${miCN}">
-                    <i class="${iconCN}"></i>
-                    ${inBlockMsg}
+                    <div class="msg-left">
+                      <i class="${iconCN}"></i>
+                      ${inBlockMsg}
+                    </div>
+                    <div class="msg-right"></div>
                   </div>
                 `
                 msgTime2CKc.innerHTML = outBlockMsg
+                if (button2Change) {
+                  msgTime2CKc.qsf('.msg-right').appendChild(button2Change)
+                }
               })
             })
           }
