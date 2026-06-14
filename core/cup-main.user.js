@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.34
-// @description 2026-06-09 14:50  
+// @version     19.36  
+// @description 2026-06-14 10:58
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.34
-    let CUPvT = '@26-06-09 14:50' 
+    let CUPvS = 19.36 
+    let CUPvT = '@26-06-14 10:58' 
     let CUPvSce = 18.20
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2051,7 +2051,8 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal220', '.row', 'No caigas en phishing'],
           ['#divModal227', '.row', 'Evaluación docente'],
           ['#divModal231', '.row', 'Contacto consejería psicológica'],
-          ['#divModal239', '.row', 'Anunicio servicios odontológicos'],
+          ['#divModal239', '.row', 'Anuncio servicios odontológicos'],
+          ['#divModal240', '.row', 'Anuncio de inglés'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
