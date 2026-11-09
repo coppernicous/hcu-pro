@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name        CUP RAW
 // @namespace   Violentmonkey Scripts
-// @version     19.52
-// @description 2026-10-09 21:04
+// @version     19.54
+// @description 2026-11-09 07:58
 // @match       *://*usat.edu.pe/*
 // @icon        https://www.iconsdb.com/icons/preview/red/books-xxl.png
 // @grant       none
@@ -21,8 +21,8 @@
     return prot + '//' + (strP ? strP + '.' + cSite.d : cSite.d) + '/' + strS;
   }
   if (loc.host.endsWith(cSite['d']) && 1 == 1) {
-    let CUPvS = 19.52
-    let CUPvT = '@26-10-09 21:04'
+    let CUPvS = 19.54
+    let CUPvT = '@26-11-09 07:58'
     let CUPvSce = 18.20
     let CUPvSaa = 19.02
     let supVm = ''
@@ -2040,7 +2040,7 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal151', '.row', 'Ascensores'],
           ['#divModal183', '.row', 'Semana NARANJA'],
           ['#divModal186', '.row', 'Aviso de encuenta'],
-          ['#divModal188 ', '.row', 'Evento TedxUSAT invitación'],
+          ['#divModal188', '.row', 'Evento TedxUSAT invitación'],
           ['#divModal189', '.row', 'Evento TedxUSAT'],
           ['#divModal190', '.row', 'Encuesta Oducal'],
           ['#divModal191', '.row', 'Finalización encuestas docente'],
@@ -2059,33 +2059,46 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
           ['#divModal265', '.row', 'Aviso de evaluación docente'],
           ['#divModal268', '.row', 'Encuesta de biblioteca'],
           ['#divModal270', '.row', 'Anuncio inglés'],
+          ['#divModal278', '.row', 'Comunicado virtualidad'],
+          ['#modalEncExt', null, 'Encuenta'],
           // ['#mdlActualizarClave', '.row', 'Actualización de clave']
         ]
         function delItem(item, sfind, sname) {
-          if (item) {
-            let wasVisible = false
-            if (typeof item.checkVisibility == 'function') {
-              wasVisible = item.checkVisibility()
-            } else {
-              wasVisible = isElementVisible(item)
-            }
-            let e2d = item.closest(sfind)
-            let nCont = $n('div')
-            if (1 == 1) {
-              e2d.parentNode.insertBefore(nCont, e2d)
-              nCont.style.display = 'none'
-              nCont.appendChild(e2d)
-            } else {
-              e2d.remove()
-            }
-            if (wasVisible) {
-              logRemoveAsking(!!1, sname, nCont)
-            }
+          if (!item) return
+
+          let wasVisible = false
+          if (typeof item.checkVisibility == 'function') {
+            wasVisible = item.checkVisibility()
+          } else if (typeof isElementVisible == 'function') {
+            wasVisible = isElementVisible(item)
+          }
+
+          let e2d = null
+          if (sfind && sfind !== 'body' && sfind !== 'html') {
+            e2d = item.closest(sfind)
+          }
+          if (!e2d || e2d === document.body || e2d === document.documentElement) {
+            e2d = item
+          }
+
+          let nCont = null
+          if (e2d.parentNode) {
+            nCont = $n('div')
+            nCont.style.display = 'none'
+            e2d.parentNode.insertBefore(nCont, e2d)
+            nCont.appendChild(e2d)
+          } else {
+            e2d.style.display = 'none'
+          }
+
+          if (wasVisible && typeof logRemoveAsking === 'function') {
+            logRemoveAsking(true, sname, nCont || e2d)
           }
         }
         function query2del(arrItem) {
           let period = 5e2
           let tries = 0
+          let maxTries = (15 * 1000) / period
           let v2d = setInterval(function() {
             tries++
             let ifinded = false
@@ -2107,11 +2120,12 @@ estimado de cuántos estudiantes están usando y disfrutando gratamente estas ca
             if (ifinded) {
               delItem(ifinded, arrItem[1], arrItem[2])
               clearInterval(v2d)
+              return
             }
-            if (tries > (15 / (1 / period))) {
-              if (tml(6)) {
-                logRemoveAsking(!1, arrItem[2])
-                clearInterval(v2d)
+            if (tries >= maxTries ) {
+              clearInterval(v2d)
+              if (typeof tml === 'function' && tml(6) && typeof logRemoveAsking === 'function') {
+                logRemoveAsking(false, arrItem[2])
               }
             }
           }, period)
